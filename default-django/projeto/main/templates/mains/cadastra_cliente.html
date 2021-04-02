@@ -1,33 +1,56 @@
 {% extends "base.html" %}
 {% block main_content %}
     {% load static %}
-    <main class="container-fluid">
+    <main class=" cadastra container-fluid d-flex flex-column justify-content-center w-50">
         <div class="row">
-            <div class="col-12 d-flex flex-row justify-content-around">
-                <h1>Preencha seus dados</h1>
+            <div class="col-6 col-sm-6 d-flex justify-content-start py-3">
+                <h1>Preencha os seus dados</h1>
+            </div>
+            <div class="col-6 col-sm-6 d-flex justify-content-end py-3">
                 <a href="/cadatra_fornecedor"> Cria uma conta de fornecedor ></a>
             </div>
         </div>
-                    <form>
-                        <div class="form w-100 p-2 my-3 d-flex flex-column px-5 justify-content-around align-items-center">
-                            <div class="row">
-                                    <div class="col-12 col-sm-6 d-flex flex-column p-0 m-0">
-                                        <span class="form-span">Nome</span>
-                                        <input class="form-input mr-3 border-style-none" type="text" name="nome"  placeholder="" required>
-                                    </div>
-                                    <div class="col-12 col-sm-6 d-flex flex-column p-0 m-0">
-                                        <span class="form-span">Sobrenome</span>
-                                        <input class="form-input mr-3 border-style-none" type="text" name="sobrenome"  placeholder="" required>
-                                    </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-12 d-flex flex-column p-0 m-0">
-                                    <span class="form-span">CPF</span>
-                                    <input class="form-input mr-3 border-style-none" type="text" name="cpf"  placeholder="" required>
-                                </div>
-                            </div>
+        <form>
+            <div class="form p-2 d-flex flex-column justify-content-around align-items-center">
+                <div class="row w-100">
+                        <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
+                            <span class="form-span">Nome</span>
+                            <input class="form-input mr-3 border-style-none" type="text" name="nome"  placeholder="" required>
                         </div>
-                    </form>
+                        <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
+                            <span class="form-span">Sobrenome</span>
+                            <input class="form-input mr-3 border-style-none" type="text" name="sobrenome"  placeholder="" required>
+                        </div>
+                </div>
+                <div class="row w-100">
+                    <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
+                        <span class="form-span">CPF</span>
+                        <input class="form-input mr-3 border-style-none" type="text" name="cpf"  placeholder="" required>
+                    </div>
+                </div>
+                <div class="row w-100">
+                    <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
+                        <span class="form-span">E-mail</span>
+                        <input class="form-input mr-3 border-style-none" type="email" name="Email"  placeholder="" required>
+                    </div>
+                    <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
+                        <span class="form-span">Senha</span>
+                        <input class="form-input mr-3 border-style-none" type="password" name="Senha"  placeholder="" required>
+                    </div>
+                </div>
+                <div class="row w-100">
+                    <div class="col-12 check-box d-flex flex-row align-items-center p-3">
+                        <input class="mr-2" type="checkbox">
+                        Aceito os Termos e condições e autorizo o uso de meus dados de acordo com a Declaração de privacidade.
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100">
+                <div class="col-12 d-flex flex-row align-items-center p-3">
+                    <button class="btn px-3" type="submit">Continuar</button>
+                </div>
+            </div>
+        </form>
 
             
 

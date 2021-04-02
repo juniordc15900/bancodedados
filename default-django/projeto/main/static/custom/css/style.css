@@ -15,14 +15,35 @@
 .cookie p a:hover{
     opacity: 0.6;
 }
-
+body{
+    background-color: whitesmoke;
+}
 /* forms */
-
+.cadastra h1{
+    font-size: 150%;
+}
+.cadastra a{
+    text-decoration: none;
+}
 .form{
     height: 100%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.671);
 }
     .form input{
+        background-color: transparent;
         border-style: none;
-        border-bottom: 1px solid grey;
+        border-bottom: 1px solid rgb(199, 197, 197);
     }
+    .form span{
+        font-size: 80%;
+        color: rgb(199, 197, 197);
+    }
+.check-box{
+    font-size: 80%;
+    color:rgb(199, 197, 197);
+}
+.btn{
+    border-style: none;
+    background-color: rgb(209, 205, 205);
+    color: grey;
+}
