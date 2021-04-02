@@ -15,62 +15,8 @@
 .cookie p a:hover{
     opacity: 0.6;
 }
-/* STYLE COLORS */
 
-:root{
-    --theme1_first_color: #d0d0d0;
-    --theme1_second_color:#256985;
-    --theme1_third_color: black;
-    --theme1_shadow_color: rgba(0, 0, 0, 0.55);
-    --theme1_opacity_color: #25688567;
-
-    --theme1_first-light_color: #ffffff;
-    --theme1_second-light_color: #56cef3;
-    --theme1_shadow-light_color: rgba(255, 255, 255, 0.507);
-
-    --theme1_first-dark_color: #ffffff;
-    --theme1_second-dark_color: #113953;
-    
-    --background_image1: url(../img/code-10.jpg);
-    /*
-    --theme1_first_color: #d0d0d0;
-    --theme1_second_color:#9e232d;
-    --theme1_third_color: black;
-    --theme1_shadow_color: rgba(0, 0, 0, 0.550);
-
-    --theme1_first-light_color: #ffffff;
-    --theme1_second-light_color: #e01818;
-
-    --theme1_first-dark_color: #ffffff;
-    --theme1_second-dark_color: #5c080f;*/
-}
-
-/* STYLE PADRÃO HTML */
-html,body{
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    background-color: whitesmoke;
-}
-
-ul,li,p,a,div,h1,h2,h3,h4,h5,h6,i,img,nav{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-    font-size: 1.2rem;
-    font-family: Century 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-decoration: none;
-    color: var(--theme1_second_color);
-}
-
-::-webkit-scrollbar{
-    width: 12px;
-}
-::-webkit-scrollbar-thumb{
-    background: linear-gradient(var(--theme1_second_color),var(--theme1_second-dark_color));
-    border-radius: 10px ;
-}
+/* forms */
 
 .form{
     height: 100%;
