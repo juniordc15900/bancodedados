@@ -12,8 +12,8 @@ sitemaps = {
 urlpatterns = [
     # Navegação #
     path('',views.index,name='home'),
-    path('contact/',views.contact,name='contact'),
-    path('about/',views.about,name='about'),   
+    path('cadastra_cliente/',views.cadastraCliente,name='cadastra_cliente'),   
+    path('cadastra_fornecedor/',views.cadastraFornecedor,name='cadastra_fornecedor'),   
     
     # Paginas especiais #
     path('admin/', admin.site.urls),
