@@ -1,19 +1,49 @@
 /* COOKIE */
 
 .cookie{
+    display: flex;
     color: #FFFFFF;
     background-color: #333333;
     font-size: 16px;
-    opacity: 0.9;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
-.cookie p a{
-    color: #FFFFFF;
-    text-decoration: underline;
+    .cookie p a{
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+
+        .cookie p a:hover{
+            opacity: 0.6;
+        }
+
+/* HEADER */
+
+.header{
+    background-color: #fff159;
+    width: 100%;
 }
 
-.cookie p a:hover{
-    opacity: 0.6;
+.header-descount{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.header-descount i{
+    font-weight: bold;
+}
+
+.header-profile-nav{
+    font-size: 14px;
+    list-style: none;
+}
+
+.header-profile-nav a{
+    text-decoration: none;
+    color: black;
 }
 
 /* forms */

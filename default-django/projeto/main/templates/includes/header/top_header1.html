@@ -1,3 +1,31 @@
-<header>
+{% load static %}
+
+<header class="header container-fluid">
+    <div class="row py-2 px-5 m-0 d-flex align-items-center justify-content-center">
+        <div class="col-2">
+            <a href=""><img src="{% static 'custom/img/logo.svg' %}" alt="logo-site" height="40px"></a>
+        </div>
+        <div class="col-6 header-search d-flex align-items-center justify-content-center">
+            <input type="text" class="form-control" placeholder="Buscar produtos, marcas e muito mais..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <button class="btn btn-light" type="button"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="col-4">
+            <p class="m-0 header-descount">Shopping Virtual Vertentes está com 10% de desconto se seu nome for <i>Leonardo Rocha</i></p>
+        </div>
+    </div>
+    <div class="py-2 px-5 m-0 row d-flex align-items-center justify-content-center">
+        <div class="col-3 d-flex align-items-center">
+            <img src="{% static 'custom/img/ufsj.png' %}" alt="logo-site">
+            <p class="font-weight-bold text-center px-2 m-0">Brasil - Minas Gerais, São João del Rei</p>
+        </div>
+        <div class="col-9 d-flex justify-content-end align-items-center">
+            <ul class="m-0 header-profile-nav d-flex justify-content-end align-items-center"> 
+                <li class="px-2"><a href="#">Cria a sua conta</a></li>
+                <li class="px-2"><a href="#">Entre</a></li>
+                <li class="px-2"><a href="#">Compras</a></li>
+                <li class="px-3"><a href="#"><i class="fas fa-lg fa-shopping-cart"></i></a></li>
+            </ul>
+        </div>
+    </div>
 </header>
 
