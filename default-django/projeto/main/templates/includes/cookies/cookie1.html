@@ -1,0 +1,11 @@
+{% if not request.COOKIES.NOME_COOKIE %}
+        <div class="cookie__box" id="cookie">
+            <div class="cookie__content">
+                <p>Utilizamos dados estatisticos para melhorar sua experiencia futura em nossos sites. Ao clicar em aceitar você declara que concorda com nossa <a href="/privacy-policy">politica de privacidade</a> e nossos <a href="/terms-of-use">termos de uso</a>.</p>
+                <div>
+                    <button class="cookie__accept" id="accepted-cookie">Aceitar</button>
+                    <button id="close-cookie">Fechar</button>
+                </div>
+            </div>
+        </div>
+{% endif %}

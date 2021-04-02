@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{current_title}}</title>
+    <meta name="description" content="{{current_description}}">
+    <!-- Google Analytics 
+    <meta name="google-site-verification" content="" />
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'libs/font-awesome/fontawesome-free-5.15.1-web/css/all.css' %}">
+    <!-- Swiper.css-->
+    <link rel="stylesheet" href="{% static 'libs/swiper/swiper.min.css' %}">
+    <!-- Custom style CSS-->
+    <link rel="stylesheet" href="{% static 'custom/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/css/style-media.css' %}">   
+  </head>
+  <body>
+    <!--Main: Conteúdo da página-->
+    {% block main_content %}
+    {% endblock %}
+    <!-- JavaScript files-->
+    <script src="{% static 'libs/swiper/swiper.min.js' %}"></script>
+    <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+    <!-- Main File-->
+    <script src="{% static 'custom/js/front.js'%}"></script>
+    <script src="{% static 'custom/js/front-swiper.js'%}"></script>
+  </body>
+</html>
