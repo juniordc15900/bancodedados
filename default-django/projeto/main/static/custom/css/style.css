@@ -38,13 +38,35 @@
 
 .header-profile-nav{
     font-size: 14px;
-    list-style: none;
 }
 
 .header-profile-nav a{
     text-decoration: none;
     color: black;
 }
+
+.list-style-none{
+    list-style: none;
+}
+
+/* FOOTERS */
+
+footer{
+    background-color: white;
+}
+
+.line-footer{
+    height: 90px;
+    width: 1px;
+    background-color: rgb(209, 208, 208);
+}
+
+.footer-nav a{
+    text-decoration: none;
+    font-size: 13px;
+    color: #333333;
+}
+
 body{
     background-color: whitesmoke;
 }

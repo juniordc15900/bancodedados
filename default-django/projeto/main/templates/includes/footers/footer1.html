@@ -1,2 +1,44 @@
-<footer>
+{% load static %}
+
+<footer class="container-fluid">
+    <div class="row footer-top px-5">
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+            <img class="py-3 pt-5" src="{% static 'custom/img/footer-payment.svg' %}" alt="logo-site">
+            <p class="h5 text-center">Pague com cartão de crédito</p>
+            <p class="text-center m-0">Boleto é um jeito díficil de conseguirmos clonar sua conta, preferimos cartão de crédito.</p>
+            <a href="#">Como pagar com cartão de crédito.</a>
+        </div>
+        <div class="col-1 d-flex justify-content-center align-items-center">
+            <div class="line-footer"></div>
+        </div>
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+            <img class="py-3 pt-5" src="{% static 'custom/img/footer-shipping.svg' %}" alt="logo-site">
+            <p class="h5 text-center">Frete grátis apenas no Acre</p>
+            <p class="text-center m-0">Nossos serviços de entrega são feitos exclusivamente por dinossauros. O Acre facilita nosso trabalho.</p>
+            <a href="#">Saiba mais sobre nossas entregas.</a>
+        </div>
+        <div class="col-1 d-flex justify-content-center align-items-center">
+            <div class="line-footer"></div>
+        </div>
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+            <img class="py-3 pt-5" src="{% static 'custom/img/footer-protected.svg' %}" alt="logo-site">
+            <p class="h5 text-center">Segurança, não temos</p>
+            <p class="text-center m-0">Você não gostou do que comprou? Infelizmente não podemos fazer nada, se quiser tenta processar a gente.</p>
+            <a href="#">Como processar a gente.</a>
+        </div>
+    </div>
+    <div class="row border-top">
+        <ul class="m-0 pt-2 d-flex footer-nav list-style-none">
+            <li class="px-2"><a href="#">Trabalhe conosco</a></li>
+            <li class="px-2"><a href="#">Termos e condições</a></li>
+            <li class="px-2"><a href="#">Como cuidamos da sua privacidade</a></li>
+            <li class="px-2"><a href="#">Contato</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <p>Copyright © 1999-2021 Ebazar.com.br LTDA.</p>
+    </div>
+    <div class="row">
+        <p>Copyright © 1999-2021 Ebazar.com.br LTDA.</p>
+    </div>
 </footer>
