@@ -14,6 +14,7 @@ urlpatterns = [
     path('',views.index,name='home'),
     path('cadastra_cliente/',views.cadastraCliente,name='cadastra_cliente'),   
     path('cadastra_fornecedor/',views.cadastraFornecedor,name='cadastra_fornecedor'),   
+    path('login/',views.login,name='login'),   
     
     # Paginas especiais #
     path('admin/', admin.site.urls),

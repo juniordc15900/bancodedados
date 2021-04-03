@@ -20,6 +20,13 @@ def about(request):
     data['current_description'] = 'b'
     return render(request,'mains/about1.html',data)
 
+
+def login(request):
+    data = {}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    return render(request,'mains/login.html',data)
+
 def cadastraCliente(request):
     data = {}
     data['current_title'] = 'a'
