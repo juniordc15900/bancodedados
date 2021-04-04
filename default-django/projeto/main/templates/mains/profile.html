@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block main_content %}
     {% load static %}
+    {% include "includes/modal/profile_add_ad.html" %}
+    {% include "includes/modal/profile_edit_ad.html" %}
+    {% include "includes/modal/profile_add_card.html" %}
     <main class="profile">
         <div class="container-fluid">
             <div class="row">
@@ -65,12 +68,12 @@
                             <p class="m-0">Vecimento: 12/22</p>
                         </div>
                         <div class="col d-flex justify-content-end">
-                            <a href="#">Excluir</a>
+                            <button type="button" class="btn btn-outline-danger m-2">Excluir</button>
                         </div>
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="#">Adicionar Novo Cartão</a>
+                            <a href="#" data-toggle="modal" data-target=".profile-add-card">Adicionar Novo Cartão</a>
                         </div>
                     </div>
                     <div class="row w-75 m-0 pt-4">
@@ -85,13 +88,13 @@
                             <p class="m-0">36301102</p>
                         </div>
                         <div class="col d-flex flex-column align-items-end">
-                            <a href="#">Editar</a>
-                            <a href="#">Excluir</a>
+                            <button type="button" class="btn btn-large btn-outline-primary m-2" data-toggle="modal" data-target=".profile-edit-ad">Editar</button>
+                            <button type="button" class="btn btn-outline-danger m-2">Excluir</button>
                         </div>
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="#">Adicionar Novo Endereço</a>
+                            <a href="#" data-toggle="modal" data-target=".profile-add-ad">Adicionar Novo Endereço</a>
                         </div>
                     </div>
                     <div class="row py-4 d-flex justify-content-end w-75">
