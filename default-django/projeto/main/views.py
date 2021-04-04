@@ -33,24 +33,19 @@ def cadastraCliente(request):
     data['current_description'] = 'b'
 
     if request.method == 'POST':
-        name = request.POST.get("name")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        cpf = request.POST.get("cpf")
         email = request.POST.get("email")
-        phone = request.POST.get("phone")
-        title = request.POST.get("title")
-        text_message = request.POST.get("text_message")
-        phone = validator_forallz.validate_check(request,phone,email,True)
-        if(phone):
-            new_contact = models.ContactMessage(name=name,email=email,phone=phone,title=title,message=text_message)
-            new_contact.save()
-            send_mail(title,text_message,'empresaforallz@gmail.com',['empresaforallz@gmail.com'],fail_silently=True)
-            messages.info(request, 'Sua mensagem foi enviada com sucesso.')
-        else:
-            data['name'] = request.POST.get("name")
-            data['email'] = request.POST.get("email")
-            data['phone'] = request.POST.get("phone")
-            data['title'] = request.POST.get("title")
-            data['text_message'] = request.POST.get("text_message")
-
+        password = request.POST.get("password")
+        new_user = models.User(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            cpf=cpf,
+            password=password,
+        )
+        new_user.save()
     return render(request,'mains/cadastra_cliente.html', data)
 
 def cadastraFornecedor(request):
