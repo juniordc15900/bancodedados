@@ -15,9 +15,10 @@ urlpatterns = [
     path('cadastra_cliente/',views.cadastraCliente,name='cadastra_cliente'),   
     path('cadastra_fornecedor/',views.cadastraFornecedor,name='cadastra_fornecedor'),   
     path('login/',views.login,name='login'),
-    path('profile/',views.profileData,name='profileData'),
 
     # Cliente #
+    path('profile/',views.profileData,name='profileData'),
+    path('logout/',views.logout,name='logout'),
 
     # Fornecedor #
     
