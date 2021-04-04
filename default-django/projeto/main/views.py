@@ -27,7 +27,7 @@ def login(request):
     data['current_description'] = 'b'
     return render(request,'mains/login.html',data)
 
-def cadastraCliente(request):
+def registerClient(request):
     data = {}
     data['current_title'] = 'a'
     data['current_description'] = 'b'
@@ -38,42 +38,34 @@ def cadastraCliente(request):
         cpf = request.POST.get("cpf")
         email = request.POST.get("email")
         password = request.POST.get("password")
-        new_user = models.User(
+        new_client = models.Client(
             first_name=first_name,
             last_name=last_name,
             email=email,
             cpf=cpf,
             password=password,
         )
-        new_user.save()
-    return render(request,'mains/cadastra_cliente.html', data)
+        new_client.save()
+    return render(request,'mains/cadastra-cliente.html', data)
 
-def cadastraFornecedor(request):
+def registerSupplier(request):
     data = {}
     data['current_title'] = 'a'
     data['current_description'] = 'b'
 
     if request.method == 'POST':
-        name = request.POST.get("name")
+        cnpj = request.POST.get("cnpj")
+        razao = request.POST.get("razao")
         email = request.POST.get("email")
-        phone = request.POST.get("phone")
-        title = request.POST.get("title")
-        text_message = request.POST.get("text_message")
-        phone = validator_forallz.validate_check(request,phone,email,True)
-        if(phone):
-            new_contact = models.ContactMessage(name=name,email=email,phone=phone,title=title,message=text_message)
-            new_contact.save()
-            send_mail(title,text_message,'empresaforallz@gmail.com',['empresaforallz@gmail.com'],fail_silently=True)
-            messages.info(request, 'Sua mensagem foi enviada com sucesso.')
-        else:
-            data['name'] = request.POST.get("name")
-            data['email'] = request.POST.get("email")
-            data['phone'] = request.POST.get("phone")
-            data['title'] = request.POST.get("title")
-            data['text_message'] = request.POST.get("text_message")
-
-    return render(request,'mains/cadastra_fornecedor.html', data)
-
+        password = request.POST.get("password")
+        new_supplier = models.Supplier(
+            cnpj=cnpj,
+            razao=razao,
+            email=email,
+            password=password,
+        )
+        new_supplier.save()
+    return render(request,'mains/cadastra-fornecedor.html', data)
 def document(request,type_model=''):
     data = {}
     document = models.MainDocument.objects.get(title=type_model)

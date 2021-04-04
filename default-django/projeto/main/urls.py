@@ -12,8 +12,8 @@ sitemaps = {
 urlpatterns = [
     # Todos #
     path('',views.index,name='home'),
-    path('cadastra_cliente/',views.cadastraCliente,name='cadastra_cliente'),   
-    path('cadastra_fornecedor/',views.cadastraFornecedor,name='cadastra_fornecedor'),   
+    path('cadastra-cliente/',views.registerClient,name='cadastra-cliente'),   
+    path('cadastra-fornecedor/',views.registerSupplier,name='cadastra-fornecedor'),   
     path('login/',views.login,name='login'),
     path('profile/',views.profileData,name='profileData'),
 

@@ -7,29 +7,36 @@
                 <h1>Preencha os seus dados</h1>
             </div>
             <div class="col-6 col-sm-6 d-flex justify-content-end py-3">
-                <a href="/cadastra_cliente"> Cria uma conta de cliente ></a>
+                <a href="/cadastra-fornecedor"> Cria uma conta de fornecedor ></a>
             </div>
         </div>
-        <form>
+        <form method="POST">
+            {% csrf_token %}
             <div class="form p-2 d-flex flex-column justify-content-around align-items-center">
                 <div class="row w-100">
                         <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
-                            <span class="form-span">CNPJ</span>
-                            <input class="form-input mr-3 border-style-none" type="text" name="nome"  placeholder="" required>
+                            <span class="form-span">Nome</span>
+                            <input class="form-input mr-3 border-style-none" type="text" name="first_name"  placeholder="" required>
                         </div>
                         <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
-                            <span class="form-span">Razão Social</span>
-                            <input class="form-input mr-3 border-style-none" type="text" name="sobrenome"  placeholder="" required>
+                            <span class="form-span">Sobrenome</span>
+                            <input class="form-input mr-3 border-style-none" type="text" name="last_name"  placeholder="" required>
                         </div>
                 </div>
                 <div class="row w-100">
                     <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
+                        <span class="form-span">CPF</span>
+                        <input class="form-input mr-3 border-style-none" type="text" name="cpf"  placeholder="" required>
+                    </div>
+                </div>
+                <div class="row w-100">
+                    <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
                         <span class="form-span">E-mail</span>
-                        <input class="form-input mr-3 border-style-none" type="email" name="Email"  placeholder="" required>
+                        <input class="form-input mr-3 border-style-none" type="email" name="email"  placeholder="" required>
                     </div>
                     <div class="col-12 col-sm-6 d-flex flex-column p-3 m-0">
                         <span class="form-span">Senha</span>
-                        <input class="form-input mr-3 border-style-none" type="password" name="Senha"  placeholder="" required>
+                        <input class="form-input mr-3 border-style-none" type="password" name="password"  placeholder="" required>
                     </div>
                 </div>
                 <div class="row w-100">
@@ -45,13 +52,5 @@
                 </div>
             </div>
         </form>
-
-            
-
-        </div>
-        <div class="row">
-
-        </div>
-        
     </main>
 {% endblock %}
