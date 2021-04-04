@@ -67,8 +67,13 @@ footer{
     color: #333333;
 }
 
+.footer-text{
+    font-size: 10px;
+    color: grey;
+}
+
 body{
-    background-color: whitesmoke;
+    background-color: rgb(230, 228, 228);
 }
 /* forms */
 .cadastra h1{
@@ -84,20 +89,15 @@ body{
     .cadastra .form input{
         background-color: transparent;
         border-style: none;
-        border-bottom: 1px solid rgb(199, 197, 197);
+        border-bottom: 1px solid rgb(151, 149, 151);
     }
     .cadastra .form span{
         font-size: 80%;
-        color: rgb(199, 197, 197);
+        color: rgb(151, 149, 151);
     }
 .check-box{
     font-size: 80%;
-    color:rgb(199, 197, 197);
-}
-.btn{
-    border-style: none;
-    background-color: rgb(209, 205, 205);
-    color: grey;
+    color:rgb(151, 149, 151);
 }
 
 
@@ -139,4 +139,20 @@ body{
 }
 .btn-cria:hover{
     background-color: rgba(22, 157, 235, 0.096);
+}
+
+/* PROFILE */
+
+.profile-bg{
+    background-color: white;
+}
+
+.profile-nav{
+    background-color: whitesmoke;
+    height: 100%;
+}
+
+.profile-nav a{
+    text-decoration: none;
+    color: #333333;
 }
