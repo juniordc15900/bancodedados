@@ -5,6 +5,33 @@ $(document).ready(function () {
 	});
 });
 
+var swiper = new Swiper('.swiper-container.banner', {
+	cssMode: true,
+	navigation: {
+	  nextEl: '.swiper-button-next.banner',
+	  prevEl: '.swiper-button-prev.banner',
+	},
+	pagination: {
+	  el: '.swiper-pagination.banner'
+	},
+	mousewheel: true,
+	keyboard: true,
+  });
+
+var swiper = new Swiper('.swiper-container.product', {
+	slidesPerView: 5,
+	spaceBetween: 20,
+	loop: true,
+	navigation: {
+		nextEl: '.swiper-button-next.product',
+		prevEl: '.swiper-button-prev.product',
+	},
+	pagination: {
+		el: '.swiper-pagination.product',
+		clickable: true,
+	},
+});
+
 
 
 
