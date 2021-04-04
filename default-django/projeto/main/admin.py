@@ -9,6 +9,4 @@ admin.site.register(models.Card)
 
 
 
-
-
     

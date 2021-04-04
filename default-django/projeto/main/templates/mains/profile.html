@@ -35,27 +35,31 @@
                         <h2 class="h4">Dados da conta</h2>
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
-                        <h3 class="col-3 h5">Usuário</h3>
-                        <input class="col-6" type="text" value="marcelocolchete" name="sobrenome"  placeholder="" required>                            
+                        <h3 class="col-3 h5">Email</h3>
+                        <input class="col-6" type="email" value="{{user.email}}" name="email"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
-                        <h3 class="col-3 h5">Email</h3>
-                        <input class="col-6" type="text" value="marcelomcolchete@gmail.com" name="sobrenome"  placeholder="" required>                            
+                        <h3 class="col-3 h5">Senha</h3>
+                        <input class="col-6" type="password" value="{{user.password}}" name="password"  placeholder="" required>                            
                     </div>
                     <div class="row w-75 m-0 pt-4">
                         <h2 class="h4">Dados pessoais</h2>
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
-                        <h3 class="col-3 h5">Nome</h3>
-                        <input class="col-6" type="text" value="marcelocolchete" name="sobrenome"  placeholder="" required>                            
+                        <h3 class="col-3 h5">Primeiro Nome</h3>
+                        <input class="col-6" type="text" value="{{user.first_name}}" name="nome"  placeholder="" required>                            
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-3 h5">Ultimo Nome</h3>
+                        <input class="col-6" type="text" value="{{user.last_name}}" name="sobrenome"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Documento</h3>
-                        <input class="col-6" type="text" value="marcelomcolchete@gmail.com" name="sobrenome"  placeholder="" required>                            
+                        <input class="col-6" type="text" value="{{document}}" name="document"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Telefone</h3>
-                        <input class="col-6" type="text" value="marcelomcolchete@gmail.com" name="sobrenome"  placeholder="" required>                            
+                        <input class="col-6" type="text" value="{{phone}}" name="phone"  placeholder="">                            
                     </div>
                     <div class="row w-75 m-0 pt-4">
                         <h2 class="h4">Cartões</h2>
