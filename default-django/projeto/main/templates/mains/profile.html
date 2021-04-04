@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block main_content %}
+    {% load static %}
+    <main class="profile">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 px-0 pr-4">
+                    <div class="w-100 profile-nav d-flex flex-column align-items-center">
+                        <a class="py-2 pt-5 d-flex flex-column align-items-center justify-content-center" href="#">
+                            <i class="fas fa-2x fa-home"></i>
+                            <p>Inicio</p>
+                        </a>
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="#">
+                            <i class="fas fa-2x fa-user"></i>
+                            <p>Perfil</p>
+                        </a>
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="#">
+                            <i class="fas fa-2x fa-shopping-cart"></i>
+                            <p>Carrinho</p>
+                        </a>
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="#">
+                            <i class="fas fa-2x fa-shopping-bag"></i>
+                            <p>Histórico</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col container-fluid px-5 d-flex align-items-center justify-content-center flex-column py-3">
+                    <div class="row w-75 m-0 pb-4">
+                        <h1>Meus Dados</h1>
+                    </div>
+                    <div class="row w-75 m-0">
+                        <h2 class="h4">Dados da conta</h2>
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-3 h5">Usuário</h3>
+                        <input class="col-6" type="text" value="marcelocolchete" name="sobrenome"  placeholder="" required>                            
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-3 h5">Email</h3>
+                        <input class="col-6" type="text" value="marcelomcolchete@gmail.com" name="sobrenome"  placeholder="" required>                            
+                    </div>
+                    <div class="row w-75 m-0 pt-4">
+                        <h2 class="h4">Dados pessoais</h2>
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-3 h5">Nome</h3>
+                        <input class="col-6" type="text" value="marcelocolchete" name="sobrenome"  placeholder="" required>                            
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-3 h5">Documento</h3>
+                        <input class="col-6" type="text" value="marcelomcolchete@gmail.com" name="sobrenome"  placeholder="" required>                            
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-3 h5">Telefone</h3>
+                        <input class="col-6" type="text" value="marcelomcolchete@gmail.com" name="sobrenome"  placeholder="" required>                            
+                    </div>
+                    <div class="row w-75 m-0 pt-4">
+                        <h2 class="h4">Cartões</h2>
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <img alt="marca-cartao col-2" src="{% static 'custom/img/mastercard.gif' %}" height="50px">
+                        <div class="col-6 px-5">
+                            <h3 class="h5 m-0">Terminado em 1234</h3>
+                            <p class="m-0">Mastercard</p>
+                            <p class="m-0">Vecimento: 12/22</p>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <a href="#">Excluir</a>
+                        </div>
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="#">Adicionar Novo Cartão</a>
+                        </div>
+                    </div>
+                    <div class="row w-75 m-0 pt-4">
+                        <h2 class="h4">Endereços</h2>
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <h3 class="col-2 h5">Endereço1</h3>
+                        <div class="col-6 px-3">
+                            <h3 class="h5 m-0">Avenida Rubens Barbosa, 158, APT 303</h3>
+                            <p class="m-0">São João del Rei</p>
+                            <p class="m-0">Minas Gerais, Brasil</p>
+                            <p class="m-0">36301102</p>
+                        </div>
+                        <div class="col d-flex flex-column align-items-end">
+                            <a href="#">Editar</a>
+                            <a href="#">Excluir</a>
+                        </div>
+                    </div>
+                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="#">Adicionar Novo Endereço</a>
+                        </div>
+                    </div>
+                    <div class="row py-4 d-flex justify-content-end w-75">
+                        <button type="button" class="btn btn-primary">Salvar Alterações</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

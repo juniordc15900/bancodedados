@@ -14,11 +14,11 @@ def index(request):
     data['current_description'] = 'b'
     return render(request, 'mains/home1.html',data)
 
-def about(request):
+def profileData(request):
     data = {}
     data['current_title'] = 'a'
     data['current_description'] = 'b'
-    return render(request,'mains/about1.html',data)
+    return render(request,'mains/profile.html',data)
 
 
 def login(request):
@@ -88,9 +88,3 @@ def document(request,type_model=''):
     data['current_description'] = 'b'
 
     return render(request, 'mains/document1.html',data)
-
-def error_404(request, *args, **kwargs):
-    data={}
-    data['current_title'] = 'a'
-    data['current_description'] = 'b'
-    return render(request,'mains/404page1.html',data)

@@ -10,11 +10,16 @@ sitemaps = {
 }
 
 urlpatterns = [
-    # Navegação #
+    # Todos #
     path('',views.index,name='home'),
     path('cadastra_cliente/',views.cadastraCliente,name='cadastra_cliente'),   
     path('cadastra_fornecedor/',views.cadastraFornecedor,name='cadastra_fornecedor'),   
-    path('login/',views.login,name='login'),   
+    path('login/',views.login,name='login'),
+    path('profile/',views.profileData,name='profileData'),
+
+    # Cliente #
+
+    # Fornecedor #
     
     # Paginas especiais #
     path('admin/', admin.site.urls),
@@ -22,5 +27,3 @@ urlpatterns = [
     path('privacy-policy', views.document,{"type_model":"POLÍTICA DE PRIVACIDADE"}),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap'),
 ]
-
-handler404 = views.error_404
