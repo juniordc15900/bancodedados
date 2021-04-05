@@ -112,6 +112,12 @@ def registerSupplier(request):
 
     return render(request,'mains/cadastra-fornecedor.html', data)
 
+def productPage(request):
+    data = {}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    return render(request, 'mains/product-page.html',data)
+
 def document(request,type_model=''):
     data = {}
     document = models.MainDocument.objects.get(title=type_model)

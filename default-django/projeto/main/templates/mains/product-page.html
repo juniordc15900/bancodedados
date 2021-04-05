@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block main_content %}
+    {% load static %}
+    {% include "includes/cookies/cookie1.html" %}
+    <main class="product-page">
+        <div class="container-fluid m-0">
+            <div class="row">
+                <div class="col-12 py-5 w-100 h-100 d-flex align-items-center justify-content-around">
+                    <div class="col-2"></div>
+                    <div class="col-8 w-100 h-100 p-0 m-0">
+                        <div class="row p-0">
+                            <div class="col-12 px-3 p-0 m-0">
+                                <a href="home1.html">voltar à lista </a> |
+                            </div>
+                        </div>
+                        <div class="row p-0 m-0">
+                            <div class="col-8 p-5 d-flex align-items-center justify-content-around img-product">
+                                <img src="{% static 'custom/img/bicicleta.jpg' %}" alt="logo-site">
+                            </div>
+                            <div class="col-4 p-3 info-product">
+                                <div class="row p-0 m-0 d-flex align-items-center justify-content-around">
+                                    <div class="col-10">
+                                        <h3>Produto 1 bicicleta A11 dual sim 64 Gb Azul</h3>
+                                    </div>
+                                    <div class="col-2 heart">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                </div>
+                                <div class="row p-0 m-0">
+                                    <div class="col-6">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>10023 opiniões</p>
+                                    </div>
+                                </div>
+                                <div class="row p-3 price">
+                                    <div class="col-12 p-0 m-0">
+                                        <h1>R$ 989</h1>
+                                        <h4>em 10x R$98,90 sem juros</h4>
+                                        <p><a>ver meios de pagamento</a></p>
+                                    </div>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-12 p-0">
+                                        <p>Fornecedor: <a href="">Fornecedor 1</a></p>
+                                        <h4>Estoque Disponível</h4>
+                                        <div class="dropdown d-flex">
+                                            <h4 class="mr-3">Quantidade:</h4>
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              1 unidade
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                              <a class="dropdown-item" href="#">2 unidades</a>
+                                              <a class="dropdown-item" href="#">3 unidades</a>
+                                              <a class="dropdown-item" href="#">4 unidades</a>
+                                              <a class="dropdown-item" href="#">5 unidades</a>
+                                              <a class="dropdown-item" href="#">6 unidades</a>
+                                              <a class="dropdown-item" href="#">7 unidades</a>
+                                              <a class="dropdown-item" href="#">8 unidades</a>
+                                              <a class="dropdown-item" href="#">9 unidades</a>
+                                              <a class="dropdown-item" href="#">10 unidades</a>
+                                            </div>
+                                        </div>
+                                        <div class=" buttons-buy d-flex flex-column align-items-center justify-content-around py-3">
+                                            <a href="#" class="w-100"><button type="button" class="btn btn-primary w-100 mb-2">Comprar Agora</button></a>
+                                            <a href="#" class="w-100"><button type="button" class="btn btn-light w-100">Adicionar ao carrinho</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-12 p-0">
+                                        <h4>Informaçoes do Fornecedor</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+
+
+
+{% endblock %}
