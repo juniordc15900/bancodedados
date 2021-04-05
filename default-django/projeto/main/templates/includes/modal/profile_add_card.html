@@ -4,33 +4,34 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <form class="p-5" method="post">
+        {% csrf_token %}
         <div class="form-group">
           <label for="cardNumber">Numero</label>
-          <input type="text" class="form-control" id="cardNumber" aria-describedby="cardNumber" placeholder="Numero do seu cartão">
+          <input type="text" class="form-control" name="cardNumber" id="cardNumber" aria-describedby="cardNumber" placeholder="Numero do seu cartão">
           <small id="cardNumber" class="form-text text-muted">Nós vamos cuidar bem do seu cartão, pode confiar.</small>
         </div>
         <div class="form-group row">
           <div class="col-4">
             <label for="cardValidation">Validade</label>
-            <input type="date" class="form-control" id="cardValidation" aria-describedby="cardValidation">
+            <input type="date" class="form-control" name="cardValidation" id="cardValidation" aria-describedby="cardValidation">
           </div>
           <div class="col-4">
             <label for="cardSecurity">Cod. Segurança</label>
-            <input type="text" class="form-control" id="cardSecurity" aria-describedby="cardSecurity" placeholder="123">
+            <input type="text" class="form-control" name="cardSecurity" id="cardSecurity" aria-describedby="cardSecurity" placeholder="123">
           </div>
           <div class="col-4 d-flex flex-column">
             <label for="cardFlag">Bandeira</label>
-            <select class="custom-select">
-              <option value="0">Mastercard</option>
-              <option value="1">Elo</option>
-              <option value="2">Visa</option>
-              <option value="3">Carteirinha do RU</option>
-              <option value="4">Cielo</option>
+            <select class="custom-select" name="cardFlag">
+              <option value="mastercard">Mastercard</option>
+              <option value="elo">Elo</option>
+              <option value="visa">Visa</option>
+              <option value="carteirinha do ru">Carteirinha do RU</option>
+              <option value="cielo">Cielo</option>
             </select>
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" name ="profile_add_card">Submit</button>
         </div>
       </form>
     </div>

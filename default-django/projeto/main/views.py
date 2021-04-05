@@ -20,11 +20,75 @@ def index(request):
 
 def profileData(request):
     data = {}
-    data['current_title'] = 'a'
-    data['current_description'] = 'b'
+    data['address_list'] = models.Address.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
+    data['card_list'] = models.Card.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
+    data['client'] = models.Client.objects.get(email=request.user.email)
     if request.method == 'POST':
-        print("test")
+        print(request.POST)
+        if 'profile_add_ad' in request.POST:
+            addressStreet = request.POST.get("addressStreet")
+            addressPostal = request.POST.get("addressPostal")
+            addressNumber = request.POST.get("addressNumber")
+            addressComplement = request.POST.get("addressComplement")
+            addressCity = request.POST.get("addressCity")
+            addressState = request.POST.get("addressState")
+            addressCountry = request.POST.get("addressCountry")
+            try:
+                new_address = models.Address(    
+                    street = addressStreet,
+                    city = addressCity,
+                    state = addressState,
+                    country = addressCountry,
+                    number = addressNumber,
+                    complement = addressComplement,
+                    cep = addressPostal,
+                    client = models.Client.objects.get(email=request.user.email)
+                )
+                new_address.save()
+            except:
+                print("Deu erro na criação")
+        elif 'profile_add_card' in request.POST:
+            cardNumber = request.POST.get("cardNumber")
+            cardValidation = request.POST.get("cardValidation")
+            cardSecurity = request.POST.get("cardSecurity")
+            cardFlag = request.POST.get("cardFlag")
+            try:
+                new_card = models.Card(
+                    client = models.Client.objects.get(email=request.user.email),
+                    number = cardNumber,
+                    validation = cardValidation,
+                    security_code = cardSecurity,
+                    flag = cardFlag
+                )
+                new_card.save()
+            except:
+                print("Deu erro na criação")
+        elif 'profile_add_card' in request.POST:
+            profileEmail = request.POST.get()
+            profileEmail = request.POST.get()
+            profileEmail = request.POST.get()
+            profileEmail = request.POST.get()
+            profileEmail = request.POST.get()
+            profileEmail = request.POST.get()
+        else:
+            print("coecoe")
     return render(request,'mains/profile.html',data)
+
+def delete(request,delete_type,delete_pk):
+    data = {}
+    if(delete_type == 'address'):
+        delete_address = models.Address.objects.get(pk=delete_pk)
+        if(delete_address.client == models.Client.objects.get(email=request.user.email)):
+            delete_address.delete()
+    elif(delete_type == 'card'):
+        delete_card = models.Card.objects.get(pk=delete_pk)
+        if(delete_card.client == models.Client.objects.get(email=request.user.email)):
+            delete_card.delete()
+    else:
+        print("Erro no sistema.")
+
+    render(request,'mains/profile.html',data)
+    return redirect('profileData')
 
 def logout(request):
     data = {}

@@ -10,7 +10,6 @@ class Client(models.Model):
     email = models.EmailField()
     phone = models.BigIntegerField(default=0)
     password = models.CharField(max_length=100)
-    
 
     def __str__(self):
         return self.first_name+" "+self.last_name
@@ -50,7 +49,7 @@ class Address(models.Model):
         return "Cliente: "+self.client.first_name+' cep: '+str(self.cep)
 
 class Card(models.Model):
-
+    client = models.ForeignKey(Client, on_delete=models.CASCADE,default=None)
     number = models.BigIntegerField()
     validation = models.DateField()
     security_code = models.BigIntegerField()

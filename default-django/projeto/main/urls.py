@@ -19,11 +19,12 @@ urlpatterns = [
 
     # Cliente #
     path('profile/',views.profileData,name='profileData'),
-    path('logout/',views.logout,name='logout'),
 
     # Fornecedor #
     
     # Paginas especiais #
+    path('logout/',views.logout,name='logout'),
+    path('delete/<str:delete_type>/<str:delete_pk>/', views.delete, name='delete'),
     path('admin/', admin.site.urls),
     path('terms-of-use', views.document,{"type_model":"TERMOS DE USO"}),
     path('privacy-policy', views.document,{"type_model":"POLÍTICA DE PRIVACIDADE"}),

@@ -2,7 +2,6 @@
 {% block main_content %}
     {% load static %}
     {% include "includes/modal/profile_add_ad.html" %}
-    {% include "includes/modal/profile_edit_ad.html" %}
     {% include "includes/modal/profile_add_card.html" %}
     <main class="profile">
         <div class="container-fluid">
@@ -27,7 +26,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="col container-fluid px-5 d-flex align-items-center justify-content-center flex-column py-3">
+                <form class="col container-fluid px-5 d-flex align-items-center justify-content-center flex-column py-3" method="POST">
+                {% csrf_token %}
                     <div class="row w-75 m-0 pb-4">
                         <h1>Meus Dados</h1>
                     </div>
@@ -36,45 +36,48 @@
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Email</h3>
-                        <input class="col-6" type="email" value="{{user.email}}" name="email"  placeholder="" required>                            
+                        <input class="col-6" type="email" value="{{client.email}}" name="email"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Senha</h3>
-                        <input class="col-6" type="password" value="{{user.password}}" name="password"  placeholder="" required>                            
+                        <input class="col-6" type="password" value="{{client.password}}" name="password"  placeholder="" required>                            
                     </div>
                     <div class="row w-75 m-0 pt-4">
                         <h2 class="h4">Dados pessoais</h2>
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Primeiro Nome</h3>
-                        <input class="col-6" type="text" value="{{user.first_name}}" name="nome"  placeholder="" required>                            
+                        <input class="col-6" type="text" value="{{client.first_name}}" name="nome"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Ultimo Nome</h3>
-                        <input class="col-6" type="text" value="{{user.last_name}}" name="sobrenome"  placeholder="" required>                            
+                        <input class="col-6" type="text" value="{{client.last_name}}" name="sobrenome"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Documento</h3>
-                        <input class="col-6" type="text" value="{{document}}" name="document"  placeholder="" required>                            
+                        <input class="col-6" type="text" value="{{client.cpf}}" name="document"  placeholder="" required>                            
                     </div>
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <h3 class="col-3 h5">Telefone</h3>
-                        <input class="col-6" type="text" value="{{phone}}" name="phone"  placeholder="">                            
+                        <input class="col-6" type="text" value="{{client.phone}}" name="phone"  placeholder="">                            
                     </div>
                     <div class="row w-75 m-0 pt-4">
                         <h2 class="h4">Cartões</h2>
                     </div>
-                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
-                        <img alt="marca-cartao col-2" src="{% static 'custom/img/mastercard.gif' %}" height="50px">
-                        <div class="col-6 px-5">
-                            <h3 class="h5 m-0">Terminado em 1234</h3>
-                            <p class="m-0">Mastercard</p>
-                            <p class="m-0">Vecimento: 12/22</p>
+                    {% for card in card_list %}
+                        <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                            <img alt="marca-cartao col-2" src="{% static 'custom/img/mastercard.gif' %}" height="50px">
+                            <div class="col-6 px-5">
+                                <h3 class="h5 m-0">Número: {{card.number}}</h3>
+                                <p class="m-0">{{card.flag}}</p>
+                                <p class="m-0">Vecimento: {{card.validation}}</p>
+                                <p class="m-0">Vecimento: {{card.security_code}}</p>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <a href="/delete/card/{{card.pk}}"><button type="button" class="btn btn-outline-danger m-2">Excluir</button></a>
+                            </div>
                         </div>
-                        <div class="col d-flex justify-content-end">
-                            <button type="button" class="btn btn-outline-danger m-2">Excluir</button>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <div class="col d-flex justify-content-end">
                             <a href="#" data-toggle="modal" data-target=".profile-add-card">Adicionar Novo Cartão</a>
@@ -83,26 +86,27 @@
                     <div class="row w-75 m-0 pt-4">
                         <h2 class="h4">Endereços</h2>
                     </div>
-                    <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
-                        <h3 class="col-2 h5">Endereço1</h3>
-                        <div class="col-6 px-3">
-                            <h3 class="h5 m-0">Avenida Rubens Barbosa, 158, APT 303</h3>
-                            <p class="m-0">São João del Rei</p>
-                            <p class="m-0">Minas Gerais, Brasil</p>
-                            <p class="m-0">36301102</p>
+                    {% for address in address_list %}
+                        <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
+                            <h3 class="col-2 h5">Endereço{{address.pk}}</h3>
+                            <div class="col-6 px-3">
+                                <h3 class="h5 m-0">{{address.street}}, {{address.number}}, {{address.complement}}</h3>
+                                <p class="m-0">{{address.city}}</p>
+                                <p class="m-0">{{address.state}}, {{address.country}}</p>
+                                <p class="m-0">{{address.cep}}</p>
+                            </div>
+                            <div class="col d-flex flex-column align-items-end">
+                                <a href="/delete/address/{{address.pk}}"><button type="button" class="btn btn-outline-danger m-2">Excluir</button></a>
+                            </div>
                         </div>
-                        <div class="col d-flex flex-column align-items-end">
-                            <button type="button" class="btn btn-large btn-outline-primary m-2" data-toggle="modal" data-target=".profile-edit-ad">Editar</button>
-                            <button type="button" class="btn btn-outline-danger m-2">Excluir</button>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                         <div class="col d-flex justify-content-end">
                             <a href="#" data-toggle="modal" data-target=".profile-add-ad">Adicionar Novo Endereço</a>
                         </div>
                     </div>
                     <div class="row py-4 d-flex justify-content-end w-75">
-                        <button type="button" class="btn btn-primary">Salvar Alterações</button>
+                        <button type="submit" class="btn btn-primary" name="profile_save">Salvar Alterações</button>
                     </div>
                 </div>
             </div>
