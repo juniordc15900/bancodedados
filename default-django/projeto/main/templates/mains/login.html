@@ -3,6 +3,7 @@
     {% load static %}
     <main class="login container-fluid d-flex flex-column justify-content-center w-100">
         <form class="d-flex justify-content-around" method="POST">
+            {% csrf_token %}
             <div class="form p-2 d-flex flex-column justify-content-center align-items-center w-25 m-0 my-5">
                 <div class="row w-100">
                     <div class="col-12 col-sm-12 d-flex flex-column align-items-center p-3 m-0">
@@ -11,23 +12,26 @@
                 </div>
                 <div class="row w-100">
                     <div class="col-12 col-sm-12 d-flex flex-column p-3 m-0">
-                        <input class="form-input mr-3 border-style-none" type="email" name="Email"  placeholder="E-mail" required>
+                        <input class="form-input mr-3 border-style-none" type="email" name="username"  placeholder="E-mail" required>
                     </div>
                 </div>
                 <div class="row w-100">
                     <div class="col-12 col-sm-12 d-flex flex-column p-3 m-0">
-                        <input class="form-input mr-3 border-style-none" type="password" name="Senha"  placeholder="Senha" required>
+                        <input class="form-input mr-3 border-style-none" type="password" name="password"  placeholder="Senha" required>
                     </div>
                 </div>
                 <div class="row w-100">
                     <div class="col-12 col-sm-12 p-3 d-flex justify-content-center w-100">
-                        <a href="#" class="w-100 h-50"><button class="btn-continua w-100 px-3" type="submit">Continuar</button></a>
+                        <button class="btn-continua px-3 w-100 h-100" type="submit">Continuar</button>
                     </div>
                 </div>
                 <div class="row w-100">
                     <div class="col-12 col-sm-12 p-3 d-flex justify-content-center w-100">
-                        <a href="cadastra_cliente/" class="w-100 h-50"><button class="btn-cria w-100 px-3" type="submit">Criar Conta</button></a>
+                        <a href="cadastra_cliente/" class="w-100 h-50 d-flex align-items-center justify-content-center">Criar Conta</a>
                     </div>    
+                </div>
+                <div class="row w-100 d-flex align-items-center justify-content-center">
+                    <span style="color:#333333">{{message}}</span>
                 </div>
             </div>
         </form>
