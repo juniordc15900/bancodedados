@@ -226,4 +226,28 @@ body{
 .row.info{
     background-color: white;
 }
+.product-page .info-product,
+.product-page .img-product{
+    background-color: white;
+}
 
+.product-page .info-product{
+    border-left: 1px solid grey;
+}
+.product-page .info-product .heart i{
+    font-size: 200%;
+}
+.product-page .img-product img{
+    width: 100%;
+    border-bottom: 1px solid grey;
+}
+
+.product-page .price h1,
+.product-page .price h4,
+.product-page .price p{
+    margin: 0;
+}
+
+.product-page .buttons-buy{
+    border-bottom: 1px solid grey;
+}
