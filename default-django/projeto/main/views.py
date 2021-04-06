@@ -20,9 +20,6 @@ def index(request):
 
 def profileData(request):
     data = {}
-    data['address_list'] = models.Address.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
-    data['card_list'] = models.Card.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
-    data['client'] = models.Client.objects.get(email=request.user.email)
     if request.method == 'POST':
         print(request.POST)
         if 'profile_add_ad' in request.POST:
@@ -63,15 +60,28 @@ def profileData(request):
                 new_card.save()
             except:
                 print("Deu erro na criação")
-        elif 'profile_add_card' in request.POST:
-            profileEmail = request.POST.get()
-            profileEmail = request.POST.get()
-            profileEmail = request.POST.get()
-            profileEmail = request.POST.get()
-            profileEmail = request.POST.get()
-            profileEmail = request.POST.get()
+        elif 'profile_save' in request.POST:
+            profileEmail = request.POST.get("email")
+            profilePassword = request.POST.get("password")
+            profileFirstName = request.POST.get("first_name")
+            profileLastName = request.POST.get("last_name")
+            profileCpf = request.POST.get("cpf")
+            profilePhone = request.POST.get("phone")
+            try:
+                edit_profile = models.Client.objects.get(email=request.user.email)
+                edit_profile.first_name = profileFirstName
+                edit_profile.last_name = profileLastName
+                edit_profile.cpf = profileCpf
+                edit_profile.phone = profilePhone
+                edit_profile.password = profilePassword
+                edit_profile.save(force_update=True)
+            except:
+                print("Deu erro na edição")
         else:
             print("coecoe")
+    data['address_list'] = models.Address.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
+    data['card_list'] = models.Card.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
+    data['client'] = models.Client.objects.get(email=request.user.email)
     return render(request,'mains/profile.html',data)
 
 def delete(request,delete_type,delete_pk):
