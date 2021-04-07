@@ -1,5 +1,21 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.TextField(max_length=500, blank=True)
+    
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 # Paginas do Site
     
@@ -27,7 +43,7 @@ class Supplier(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="custom/img/", null=True, blank=True,)
+    image = models.ImageField(upload_to="static/custom/img/", null=True, blank=True,)
     id_product = models.BigIntegerField()
     price = models.CharField(max_length=10)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)
@@ -70,6 +86,8 @@ class Card(models.Model):
         choices=types_flag,
         default=mastercard,
     )
+    client = models.ForeignKey(Client, on_delete=models.CASCADE,default=None)
+
 
 
 

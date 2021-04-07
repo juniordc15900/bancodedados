@@ -15,12 +15,12 @@
                         </div>
                         <div class="row p-0 m-0">
                             <div class="col-8 p-5 d-flex align-items-center justify-content-around img-product">
-                                <img src="{% static 'custom/img/bicicleta.jpg' %}" alt="logo-site">
+                                <img src="{{product.image}}" alt="logo-site">
                             </div>
                             <div class="col-4 p-3 info-product">
                                 <div class="row p-0 m-0 d-flex align-items-center justify-content-around">
                                     <div class="col-10">
-                                        <h3>Produto 1 bicicleta A11 dual sim 64 Gb Azul</h3>
+                                        <h3>{{product.name}}</h3>
                                     </div>
                                     <div class="col-2 heart">
                                         <i class="fas fa-heart"></i>
@@ -40,14 +40,14 @@
                                 </div>
                                 <div class="row p-3 price">
                                     <div class="col-12 p-0 m-0">
-                                        <h1>R$ 989</h1>
-                                        <h4>em 10x R$98,90 sem juros</h4>
+                                        <h1>R$ {{product.price}}</h1>
+                                        <h4>em 10x R${{productx10}} sem juros</h4>
                                         <p><a>ver meios de pagamento</a></p>
                                     </div>
                                 </div>
                                 <div class="row p-3">
                                     <div class="col-12 p-0">
-                                        <p>Fornecedor: <a href="">Fornecedor 1</a></p>
+                                        <p>Fornecedor: <a href="">{{product.supplier.razao}}</a></p>
                                         <h4>Estoque Disponível</h4>
                                         <div class="dropdown d-flex">
                                             <h4 class="mr-3">Quantidade:</h4>
@@ -72,12 +72,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row p-3">
-                                    <div class="col-12 p-0">
-                                        <h4>Informaçoes do Fornecedor</h4>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
