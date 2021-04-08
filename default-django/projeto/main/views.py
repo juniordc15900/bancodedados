@@ -100,6 +100,12 @@ def delete(request,delete_type,delete_pk):
     render(request,'mains/profile.html',data)
     return redirect('profileData')
 
+def product(request,pk):
+    data = {}
+    product = models.Product.objects.get(pk=pk)
+    data['product'] = product
+    return render(request,'mains/profile.html',data)
+
 def logout(request):
     data = {}
     dj_logout(request)
