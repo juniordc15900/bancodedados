@@ -43,7 +43,7 @@ class Supplier(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="static/custom/img/", null=True, blank=True,)
+    image = models.ImageField(null=True)
     id_product = models.BigIntegerField()
     price = models.CharField(max_length=10)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)

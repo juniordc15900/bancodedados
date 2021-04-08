@@ -17,8 +17,9 @@ urlpatterns = [
     path('login/',views.login,name='login'),
     path('product-page/<str:product_pk>/',views.productPage,name='product-page'),
 
-    # Cliente #
-    path('profile/<str:role>',views.profileData,name='profileData'),
+    #Profile #
+    path('profile/1',views.profileData1,name='profileData1'),
+    path('profile/2',views.profileData2,name='profileData2'),
 
     # Fornecedor #
     
