@@ -17,13 +17,37 @@ def index(request):
     data = {}
     data['current_title'] = 'a'
     data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     supp = models.Supplier.objects.all()
     pk = random.randint(1,len(supp))
     data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(pk=pk))
     return render(request, 'mains/home1.html',data)
 
+def search(request, filter=None):
+    data = {}
+    if filter == 'f1000':
+        data['filter'] = "Produtos de 1000 reais ou mais"
+        data['product_list'] = models.Product.objects.all().filter()
+    elif filter == 'f500':
+        data['filter'] = "Produtos de 999 reais até 500 reais"
+    elif filter == 'f100':
+        data['filter'] = "Produtos de 499 reais até 100 reais"
+    elif filter == 'f99':
+        data['filter'] = "Produtos de 99 reais ou menos"
+        pass
+    return render(request, 'mains/search.html',data)
+
 def profileData(request,role):
     data = {}
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            print("foi teste123")
     if role == '1':
         if request.method == 'POST':
             if 'profile_add_ad' in request.POST:

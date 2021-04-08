@@ -16,6 +16,8 @@ urlpatterns = [
     path('cadastra-fornecedor/',views.registerSupplier,name='cadastra-fornecedor'),   
     path('login/',views.login,name='login'),
     path('product-page/<str:product_pk>/',views.productPage,name='product-page'),
+    path('search/',views.search,name='search'),
+    path('search/<str:filter>',views.search,name='search-filter'),
 
     # Cliente #
     path('profile/<str:role>',views.profileData,name='profileData'),
