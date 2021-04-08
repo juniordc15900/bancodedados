@@ -19,8 +19,9 @@ urlpatterns = [
     path('search/',views.search,name='search'),
     path('search/<str:filter>',views.search,name='search-filter'),
 
-    # Cliente #
-    path('profile/<str:role>',views.profileData,name='profileData'),
+    #Profile #
+    path('profile/1',views.profileData1,name='profileData1'),
+    path('profile/2',views.profileData2,name='profileData2'),
 
     # Fornecedor #
     

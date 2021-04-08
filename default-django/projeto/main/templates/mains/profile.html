@@ -3,6 +3,7 @@
     {% load static %}
     {% include "includes/modal/profile_add_ad.html" %}
     {% include "includes/modal/profile_add_card.html" %}
+    {% include "includes/modal/profile_add_pro.html" %}
     <main class="profile">
         <div class="container-fluid">
             <div class="row">
@@ -72,7 +73,7 @@
                                     <h3 class="h5 m-0">Número: {{card.number}}</h3>
                                     <p class="m-0">{{card.flag}}</p>
                                     <p class="m-0">Vencimento: {{card.validation}}</p>
-                                    <p class="m-0">Vencimento: {{card.security_code}}</p>
+                                    <p class="m-0">Código de Segurança: {{card.security_code}}</p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     <a href="/delete/card/{{card.pk}}"><button type="button" class="btn btn-outline-danger m-2">Excluir</button></a>
@@ -144,14 +145,14 @@
                         </div>
                         {% for product in product_list %}
                             <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
-                                <img alt="marca-cartao col-2" src="{% static 'custom/img/mastercard.gif' %}" height="50px">
+                                <img alt="marca-cartao col-2" src="/static/custom/img/{{product.image}}" height="50px">
                                 <div class="col-6 px-5">
                                     <h3 class="h5 m-0">Nome do Produto: {{product.name}}</h3>
                                     <p class="m-0">ID do Produto{{product.id_product}}</p>
                                     <p class="m-0">Preço: {{product.price}}</p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <a href="/delete/product/{{product_pk}}"><button type="button" class="btn btn-outline-danger m-2">Excluir</button></a>
+                                    <a href="/delete/product/{{product.pk}}"><button type="button" class="btn btn-outline-danger m-2">Excluir</button></a>
                                 </div>
                             </div>
                         {% endfor %}
