@@ -40,13 +40,31 @@ class Supplier(models.Model):
     def __str__(self):
         return self.razao
 
-
 class Product(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="static/custom/img/", null=True, blank=True,)
     id_product = models.BigIntegerField()
     price = models.FloatField()
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)
+    comida = 'comida'
+    computador = 'computador'
+    livro = 'livro'
+    roupa = 'roupa'
+    movel = "movel" 
+    outros = "outros" 
+    types_category = [
+        (comida,'comida'),
+        (computador,'computador'),
+        (livro,'livro'),
+        (roupa,'roupa'),
+        (movel,'movel'),
+        (outros,'outros'),
+    ]
+    category = models.CharField(
+        max_length=100,
+        choices=types_category,
+        default=comida,
+    )
 
     def __str__(self):
         return 'Fornecedor: '+self.supplier.razao+' Produto: '+self.name

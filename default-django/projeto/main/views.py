@@ -27,20 +27,54 @@ def index(request):
     supp = models.Supplier.objects.all()
     pk = random.randint(1,len(supp))
     data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(pk=pk))
+    data['category_list'] = list()
+    if models.Product.objects.all().filter(category='comida').count() > 0:
+        data['category_list'].append(models.Product.objects.all().filter(category='comida'))
+    if models.Product.objects.all().filter(category='computador').count() > 0:
+        data['category_list'].append(models.Product.objects.all().filter(category='computador'))
+    if models.Product.objects.all().filter(category='livro').count() > 0:
+        data['category_list'].append(models.Product.objects.all().filter(category='livro'))
+    if models.Product.objects.all().filter(category='roupa').count() > 0:
+        data['category_list'].append(models.Product.objects.all().filter(category='roupa'))
+    if models.Product.objects.all().filter(category='movel').count() > 0:
+        data['category_list'].append(models.Product.objects.all().filter(category='movel'))
+    if models.Product.objects.all().filter(category='outros').count() > 0:
+        data['category_list'].append(models.Product.objects.all().filter(category='outros'))
     return render(request, 'mains/home1.html',data)
 
 def search(request, filter=None):
     data = {}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
+    data['product_list'] = list()
+    product_list = models.Product.objects.all().filter()
     if filter == 'f1000':
         data['filter'] = "Produtos de 1000 reais ou mais"
-        data['product_list'] = models.Product.objects.all().filter()
+        for product in product_list:
+            if int(product.price) >= 1000:
+                data['product_list'].append(product)
     elif filter == 'f500':
         data['filter'] = "Produtos de 999 reais até 500 reais"
+        for product in product_list:
+            if int(product.price) >= 500 and int(product.price) <= 999:
+                data['product_list'].append(product)
     elif filter == 'f100':
         data['filter'] = "Produtos de 499 reais até 100 reais"
+        for product in product_list:
+            if int(int(product.price)) >= 100 and int(product.price) <= 499:
+                data['product_list'].append(product)
     elif filter == 'f99':
         data['filter'] = "Produtos de 99 reais ou menos"
-        pass
+        for product in product_list:
+            if int(product.price) < 100:
+                data['product_list'].append(product)
     return render(request, 'mains/search.html',data)
 
 def profileData(request,role):
@@ -154,6 +188,15 @@ def delete(request,delete_type,delete_pk):
 
 def productPage(request,product_pk):
     data={}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     product = models.Product.objects.get(pk=product_pk)
     data['product'] = product
     data['productx10'] = int(product.price) / 10
@@ -167,6 +210,15 @@ def logout(request):
 
 def login(request):
     data = {}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     data['current_title'] = 'a'
     data['current_description'] = 'b'
     if request.method == 'POST':
@@ -185,6 +237,15 @@ def login(request):
 
 def registerClient(request):
     data = {}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     data['current_title'] = 'a'
     data['current_description'] = 'b'
 
@@ -222,6 +283,15 @@ def registerSupplier(request):
     data = {}
     data['current_title'] = 'a'
     data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
 
     if request.method == 'POST':
         cnpj = request.POST.get("cnpj")
@@ -254,6 +324,15 @@ def registerSupplier(request):
 
 def document(request,type_model=''):
     data = {}
+    data['current_title'] = 'a'
+    data['current_description'] = 'b'
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     document = models.MainDocument.objects.get(title=type_model)
     data['content_html'] = document.content_html
     data['update'] = document.update
