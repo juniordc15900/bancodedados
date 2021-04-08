@@ -19,9 +19,10 @@ var swiper = new Swiper('.swiper-container.banner', {
   });
 
 var swiper = new Swiper('.swiper-container.product', {
-	slidesPerView: 5,
+	slidesPerView: 1,
 	spaceBetween: 20,
 	loop: true,
+	centeredSlides: true,
 	navigation: {
 		nextEl: '.swiper-button-next.product',
 		prevEl: '.swiper-button-prev.product',

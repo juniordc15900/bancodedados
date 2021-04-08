@@ -5,10 +5,11 @@
         <div class="col-2">
             <a href="/"><img src="{% static 'custom/img/logo.svg' %}" alt="logo-site" height="40px"></a>
         </div>
-        <div class="col-6 header-search d-flex align-items-center justify-content-center">
-            <input type="text" class="form-control" placeholder="Buscar produtos, marcas e muito mais..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <button class="btn btn-light" type="button"><i class="fas fa-search"></i></button>
-        </div>
+        <form class="col-6 header-search d-flex align-items-center justify-content-center" method="POST">                    
+            {% csrf_token %}
+            <input type="text" name="search_text" class="form-control" placeholder="Buscar produtos, marcas e muito mais..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <button class="btn btn-light" type="submit" name="search_for"><i class="fas fa-search"></i></button>
+        </form>
         <div class="col-4">
             <p class="m-0 header-descount">Shopping Virtual Vertentes está com 10% de desconto se seu nome for <i>Leonardo Rocha</i></p>
         </div>

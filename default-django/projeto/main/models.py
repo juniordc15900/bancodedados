@@ -45,7 +45,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(null=True)
     id_product = models.BigIntegerField()
-    price = models.CharField(max_length=10)
+    price = models.FloatField()
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)
 
     def __str__(self):
@@ -87,11 +87,6 @@ class Card(models.Model):
         default=mastercard,
     )
     client = models.ForeignKey(Client, on_delete=models.CASCADE,default=None)
-
-
-
-
-
 
 # Outros
 

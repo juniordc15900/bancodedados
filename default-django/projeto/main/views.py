@@ -26,6 +26,13 @@ def index(request):
             print(models.Product.objects.all().filter(supplier=sup))
             data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(pk=pk))
             break
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     return render(request, 'mains/home1.html',data)
 
 def profileData1(request):
@@ -133,6 +140,111 @@ def profileData2(request):
     data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(email=request.user.email))
     data['supplier'] = models.Supplier.objects.get(email=request.user.email)
     return render(request,'mains/profile.html',data)
+
+
+def search(request, filter=None):
+    data = {}
+    if filter == 'f1000':
+        data['filter'] = "Produtos de 1000 reais ou mais"
+        data['product_list'] = models.Product.objects.all().filter()
+    elif filter == 'f500':
+        data['filter'] = "Produtos de 999 reais até 500 reais"
+    elif filter == 'f100':
+        data['filter'] = "Produtos de 499 reais até 100 reais"
+    elif filter == 'f99':
+        data['filter'] = "Produtos de 99 reais ou menos"
+        pass
+    return render(request, 'mains/search.html',data)
+
+def profileData(request,role):
+    data = {}
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            print("foi teste123")
+    if role == '1':
+        if request.method == 'POST':
+            if 'profile_add_ad' in request.POST:
+                addressStreet = request.POST.get("addressStreet")
+                addressPostal = request.POST.get("addressPostal")
+                addressNumber = request.POST.get("addressNumber")
+                addressComplement = request.POST.get("addressComplement")
+                addressCity = request.POST.get("addressCity")
+                addressState = request.POST.get("addressState")
+                addressCountry = request.POST.get("addressCountry")
+                try:
+                    new_address = models.Address(    
+                        street = addressStreet,
+                        city = addressCity,
+                        state = addressState,
+                        country = addressCountry,
+                        number = addressNumber,
+                        complement = addressComplement,
+                        cep = addressPostal,
+                        client = models.Client.objects.get(email=request.user.email)
+                    )
+                    new_address.save()
+                except:
+                    print("Deu erro na criação")
+            elif 'profile_add_card' in request.POST:
+                cardNumber = request.POST.get("cardNumber")
+                cardValidation = request.POST.get("cardValidation")
+                cardSecurity = request.POST.get("cardSecurity")
+                cardFlag = request.POST.get("cardFlag")
+                try:
+                    new_card = models.Card(
+                        client = models.Client.objects.get(email=request.user.email),
+                        number = cardNumber,
+                        validation = cardValidation,
+                        security_code = cardSecurity,
+                        flag = cardFlag
+                    )
+                    new_card.save()
+                except:
+                    print("Deu erro na criação")
+            elif 'profile_save' in request.POST:
+                profileEmail = request.POST.get("email")
+                profilePassword = request.POST.get("password")
+                profileFirstName = request.POST.get("first_name")
+                profileLastName = request.POST.get("last_name")
+                profileCpf = request.POST.get("cpf")
+                profilePhone = request.POST.get("phone")
+                try:
+                    edit_profile = models.Client.objects.get(email=request.user.email)
+                    edit_profile.first_name = profileFirstName
+                    edit_profile.last_name = profileLastName
+                    edit_profile.cpf = profileCpf
+                    edit_profile.phone = profilePhone
+                    edit_profile.password = profilePassword
+                    edit_profile.save(force_update=True)
+                except:
+                    print("Deu erro na edição")
+            else:
+                print("coecoe")
+        data['address_list'] = models.Address.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
+        data['card_list'] = models.Card.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
+        data['client'] = models.Client.objects.get(email=request.user.email)
+        return render(request,'mains/profile.html',data)
+    else:
+        if request.method == 'POST':
+            print(request.POST)
+            if 'profile_add_product' in request.POST:
+                productName = request.POST.get("productName")
+                productId = request.POST.get("ProductId")
+                productPrice = request.POST.get("productPrice")
+                
+                try:
+                    new_product = models.Product(    
+                        name = productName,
+                        id_product = productId,
+                        price = productPrice,
+                        supplier = models.Supplier.objects.get(email=request.user.email)
+                    )
+                    new_product.save()
+                except:
+                    print("Deu erro na criação")
+        data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(email=request.user.email))
+        data['supplier'] = models.Supplier.objects.get(email=request.user.email)
+        return render(request,'mains/profile.html',data)
 
 
     

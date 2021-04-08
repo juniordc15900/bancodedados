@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block main_content %}
+    {% load static %}
+    {% include "includes/modal/profile_add_ad.html" %}
+    {% include "includes/modal/profile_add_card.html" %}
+    <main class="search">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 px-0 pr-4">
+                    <div class="w-100 profile-nav d-flex flex-column align-items-center">
+                        <h3>Filtros</h3>
+                        <a class="py-2 pt-5 d-flex flex-column align-items-center justify-content-center" href="/search/f1000">
+                            <p>1000 reais+</p>
+                        </a>
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="/search/f500">
+                            <p>999-500 reais</p>
+                        </a>
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="/search/f100">
+                            <p>499-100 reais</p>
+                        </a>
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="/search/f99">
+                            <p>99 reais-</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-11">
+                    <div class="supplier_day col-12 p-0">
+                        <!-- Swiper -->
+                        <div class="swiper-container product w-75">
+                            <div class="swiper_title p-3">
+                                <h1>Sua busca para: {{filter}}</h1>
+                            </div>
+                                <div class="swiper-wrapper product p-3">
+                                    {% for product in product_list %}
+                                        <div class="swiper-slide d-flex flex-column">
+                                            <a href="/product-page/{{product.pk}}"><img src="{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
+                                            <h3>{{product.name}}</h3>
+                                            <h2>R$ {{product.price}}</h2>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next product"></div>
+                            <div class="swiper-button-prev product pl-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
