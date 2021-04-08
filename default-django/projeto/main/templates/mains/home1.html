@@ -88,60 +88,17 @@
                     <!-- Swiper -->
                     <div class="swiper-container product w-75">
                         <div class="swiper_title p-3">
-                            <h1>Fornecedor do dia</h1>
+                            <h1>Fornecedor do dia:  {{product_list.0.supplier.razao}}</h1>
                         </div>
-                        <div class="swiper-wrapper product p-3">
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/bicicleta.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
+                            <div class="swiper-wrapper product p-3">
+                                {% for product in product_list %}
+                                    <div class="swiper-slide d-flex flex-column">
+                                        <a href="/product-page/{{product.pk}}"><img src="{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
+                                        <h3>{{product.name}}</h3>
+                                        <h2>R$ {{product.price}}</h2>
+                                    </div>
+                                {% endfor %}
                             </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/ps4.png' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/liquidificador.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/bicicleta.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/ps4.png' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/liquidificador.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/bicicleta.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/ps4.png' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/liquidificador.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                            <div class="swiper-slide d-flex flex-column">
-                                <img src="{% static 'custom/img/bicicleta.jpg' %}" alt="logo-site" height="150px" width="150px" class="p-3">
-                                <h3>Playstation 4</h3>
-                                <h2>R$ 2.400</h2>
-                            </div>
-                        </div>
                         <!-- Add Arrows -->
                         <div class="swiper-button-next product"></div>
                         <div class="swiper-button-prev product pl-4"></div>
