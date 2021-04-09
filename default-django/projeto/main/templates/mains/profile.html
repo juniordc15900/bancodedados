@@ -150,16 +150,22 @@
                                     <h3 class="h5 m-0">Nome do Produto: {{product.name}}</h3>
                                     <p class="m-0">ID do Produto{{product.id_product}}</p>
                                     <p class="m-0">Preço: {{product.price}}</p>
+                                    <p class="m-0">Preço: {{product.quantity}}</p>
+                                </div>
+                                <div class="col d-flex justify-content-end">
+                                    <a href="/edit/{{product.pk}}"><button type="button" name="button-edit" class="btn btn-secondary m-2">Editar Produto</button></a>
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     <a href="/delete/product/{{product.pk}}"><button type="button" class="btn btn-outline-danger m-2">Excluir</button></a>
                                 </div>
+                                
                             </div>
                         {% endfor %}
                         <div class="row profile-bg w-75 m-0 border d-flex align-items-center px-2 py-2">
                             <div class="col d-flex justify-content-end">
                                 <a href="#" data-toggle="modal" data-target=".profile-add-pro">Adicionar Novo Produto</a>
                             </div>
+                            
                         </div>
                         <div class="row py-4 d-flex justify-content-end w-75">
                             <button type="submit" class="btn btn-primary" name="profile_save">Salvar Alterações</button>
