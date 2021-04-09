@@ -26,7 +26,7 @@ class Client(models.Model):
     email = models.EmailField()
     phone = models.BigIntegerField(default=0)
     password = models.CharField(max_length=100)
-
+    cart = models.CharField(max_length=1000)
     def __str__(self):
         return self.first_name+" "+self.last_name
 

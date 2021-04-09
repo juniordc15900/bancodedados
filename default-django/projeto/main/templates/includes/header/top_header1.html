@@ -23,7 +23,6 @@
             <ul class="m-0 list-style-none header-profile-nav d-flex justify-content-end align-items-center">
                 {% if user.is_authenticated %}
                     <li class="px-2"><a href="/profile/{{user.profile.role}}">{{ user.email }}</a></li>
-                    <li class="px-2"><a href="/profile/history">{{user.profile.role}}</a></li>
                     <li class="px-2"><a href="/logout">Logout</a></li>
                 {% else %}
                     <li class="px-2"><a href="/cadastra-cliente">Cria a sua conta</a></li>

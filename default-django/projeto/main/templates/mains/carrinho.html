@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block main_content %}
+    {% load static %}
+    {% include "includes/cookies/cookie1.html" %}
+    <main class="index">
+        <div class="container-fluid m-0">
+            <div class="row">
+                <div class="main_banner col-12 w-100 p-0">
+                    <!-- Swiper -->
+                    <div class="swiper-container banner">
+                        <div class="swiper-wrapper banner">
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/Banner-site-facebook_sao-josé_1920x600.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/banner.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/Banner-site-facebook_sao-josé_1920x600.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/banner.png' %}" alt="logo-site" height="500px" width="100%">           
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/Banner-site-facebook_sao-josé_1920x600.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/banner.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/Banner-site-facebook_sao-josé_1920x600.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/banner.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/Banner-site-facebook_sao-josé_1920x600.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'custom/img/banner.png' %}" alt="logo-site" height="500px" width="100%">
+                            </div>
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next banner"></div>
+                        <div class="swiper-button-prev banner"></div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination banner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="info d-flex justify-content-center">
+                <div class="row info w-75 m-2 mt-5 p-2">
+                    <div class="col-3 m-0 p-2 d-flex flex-column align-items-center justify-content-around">
+                        <h3>Pagamento rápido</h3>
+                        <p>com Mercado Não Pago</p>
+                    </div>
+                    <div class="col-3 m-0 d-flex flex-row align-items-center justify-content-around">
+                        <div class="col-4 m-0">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="col-8 p-2">
+                            <h3>Até 12x sem juros</h3>
+                            <p>Brincadeirinha</p>
+                        </div>
+                    </div>
+                    <div class="col-3 m-0 d-flex flex-row align-items-center justify-content-around">
+                        <div class="col-4 m-0">
+                            <i class="fas fa-money-bill-alt"></i>
+                        </div>
+                        <div class="col-8 p-2">
+                            <h3>À vista no cartão e só</h3>
+                            <p>Ver mais</p>
+                        </div>
+                    </div>
+                    <div class="col-3 m-0 d-flex flex-row align-items-center justify-content-around">
+                        <div class="col-4 m-0">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <div class="col-8 p-2">
+                            <h3>Mais formas de pagamento</h3>
+                            <p>Não tem</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="supplier_day col-12 p-0">
+                    <!-- Swiper -->
+                    <div class="swiper-container product w-75">
+                        <div class="swiper_title p-3">
+                            <h1>Fornecedor do dia:  {{product_list.0.supplier.razao}}</h1>
+                        </div>
+                            <div class="swiper-wrapper product p-3">
+                                {% for product in product_list %}
+                                    <div class="swiper-slide d-flex flex-column">
+                                        <a href="/product-page/{{product.pk}}"><img src="/static/custom/img/{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
+                                        <h3>{{product.name}}</h3>
+                                        <h2>R$ {{product.price}}</h2>
+                                        <div class="d-flex">
+                                            <a href="/finaliza/{{product.pk}}"><button type="button" class="btn btn-success mx-1" id="compra-cart">Comprar Agora</button></a>
+                                            <a href="/carrinho/{{product.pk}}"><button type="button" class="btn btn-secondary mx-1" id="adiciona-cart">Adicionar ao Carrinho</button></a>
+                                        </div>    
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next product"></div>
+                        <div class="swiper-button-prev product pl-4"></div>
+                    </div>
+                </div>
+            </div>
+            {% for categoria in category_list %}
+            <div class="row">
+                <div class="supplier_day col-12 p-0">
+                    <!-- Swiper -->
+                    <div class="swiper-container product w-75">
+                        <div class="swiper_title p-3">
+                            <h1>Categoria: {{categoria.first.category}}</h1>
+                        </div>
+                            <div class="swiper-wrapper product p-3">
+                                {% for product in categoria %}
+                                    <div class="swiper-slide d-flex flex-column">
+                                        <a href="/product-page/{{product.pk}}"><img src="{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
+                                        <h3>{{product.name}}</h3>
+                                        <h2>R$ {{product.price}}</h2>
+                                        <div class="d-flex">
+                                            <a href="/finaliza/{{product.pk}}"><button type="button" class="btn btn-success mx-1" id="compra-cart">Comprar Agora</button></a>
+                                            <a href="/carrinho/{{product.pk}}"><button type="button" class="btn btn-secondary mx-1" id="adiciona-cart">Adicionar ao Carrinho</button></a>
+                                        </div>  
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next product"></div>
+                        <div class="swiper-button-prev product pl-4"></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

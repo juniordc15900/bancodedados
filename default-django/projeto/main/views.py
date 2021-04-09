@@ -33,9 +33,6 @@ def index(request):
             data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
             print(data['product_list'])
             return render(request, 'mains/search.html',data)
-    supp = models.Supplier.objects.all()
-    pk = random.randint(1,len(supp))
-    data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(pk=pk))
     data['category_list'] = list()
     if models.Product.objects.all().filter(category='comida').count() > 0:
         data['category_list'].append(models.Product.objects.all().filter(category='comida'))
@@ -406,7 +403,13 @@ def registerSupplier(request):
 
     return render(request,'mains/cadastra-fornecedor.html', data)
 
-
+def carrinho(request):
+    data = {}
+    client = models.Client.objects.get(email=request.user.email)
+    client_cart = client.cart
+    client_cart = client_cart.split(',')
+    data['carrinho'] = client_cart
+    return render(request,'mains/carrinho.html', data)
 
 def document(request,type_model=''):
     data = {}
