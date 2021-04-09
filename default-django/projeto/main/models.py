@@ -45,6 +45,7 @@ class Product(models.Model):
     image = models.ImageField(null=True)
     id_product = models.BigIntegerField()
     price = models.FloatField()
+    quantity = models.BigIntegerField(default=0)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)
     comida = 'comida'
     computador = 'computador'

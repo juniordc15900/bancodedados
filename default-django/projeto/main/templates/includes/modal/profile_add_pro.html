@@ -6,23 +6,27 @@
       <form class="p-5" method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="nameProduct">Nome do Produto:</label>
-          <input type="text" class="form-control" name="nameProduct" id="nameProduct" aria-describedby="nameProduct" placeholder="" required>
+          <label for="productName">Nome do Produto:</label>
+          <input type="text" class="form-control" name="productName"  aria-describedby="nameProduct" placeholder="" required>
         </div>
         <div class="row">
           <div class="form-group col-6">
             <label for="productId">Id do Produto</label>
-            <input type="text" class="form-control" name="productId" id="productId" aria-describedby="productId" placeholder="" required> 
+            <input type="text" class="form-control" name="productId"  aria-describedby="productId" placeholder="" required> 
           </div>
           <div class="form-group col-3">
             <label for="productPrice">Preço do Produto</label>
-            <input type="text" class="form-control" name="productPrice" id="productPrice" aria-describedby="productPrice" placeholder="" required>
+            <input type="text" class="form-control" name="productPrice"  aria-describedby="productPrice" placeholder="" required>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-12">
+          <div class="form-group col-6">
               <label for="productImage">Imagem do Produto</label>
-              <input type="file" class="form-control" name="productImage" aria-describedby="productId" placeholder="" required>
+              <input type="file" class="form-control" name="productImage" aria-describedby="productImage" placeholder="" required>
+          </div>
+          <div class="form-group col-6">
+            <label for="productImage">Quantidade de Produtos</label>
+            <input type="number" class="form-control" name="productQuant" aria-describedby="productQuant" placeholder="" required>
           </div>
         </div>
         <div class="d-flex justify-content-end">

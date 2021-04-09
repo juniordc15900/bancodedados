@@ -119,15 +119,38 @@ def profileData2(request):
         if 'profile_add_pro' in request.POST:
             productName = request.POST.get("productName")
             productImage = request.POST.get("productImage")
-            productId = request.POST.get("ProductId")
+            productId = request.POST.get("productId")
             productPrice = request.POST.get("productPrice")
+            productQuant = request.POST.get("productQuant")
+            print("2")
             
             try:
                 new_product = models.Product(    
                     name = productName,
-                    image = productImg,
+                    image = productImage,
                     id_product = productId,
                     price = productPrice,
+                    quantity= productQuant,
+                    supplier = models.Supplier.objects.get(email=request.user.email)
+                )
+                new_product.save()
+            except:
+                print("Deu erro na criação")        
+        if 'profile_edit_pro' in request.POST:
+            productName = request.POST.get("productName")
+            productImage = request.POST.get("productImage")
+            productId = request.POST.get("productId")
+            productPrice = request.POST.get("productPrice")
+            productQuant = request.POST.get("productQuant")
+            
+            
+            try:
+                new_product = models.Product(    
+                    name = productName,
+                    image = productImage,
+                    id_product = productId,
+                    price = productPrice,
+                    quantity= productQuant,
                     supplier = models.Supplier.objects.get(email=request.user.email)
                 )
                 new_product.save()
@@ -190,94 +213,6 @@ def search(request, filter=None):
                 data['product_list'].append(product)
     return render(request, 'mains/search.html',data)
 
-def profileData(request,role):
-    data = {}
-    if request.method == 'POST':
-        if 'search_for' in request.POST:
-            print("foi teste123")
-    if role == '1':
-        if request.method == 'POST':
-            if 'profile_add_ad' in request.POST:
-                addressStreet = request.POST.get("addressStreet")
-                addressPostal = request.POST.get("addressPostal")
-                addressNumber = request.POST.get("addressNumber")
-                addressComplement = request.POST.get("addressComplement")
-                addressCity = request.POST.get("addressCity")
-                addressState = request.POST.get("addressState")
-                addressCountry = request.POST.get("addressCountry")
-                try:
-                    new_address = models.Address(    
-                        street = addressStreet,
-                        city = addressCity,
-                        state = addressState,
-                        country = addressCountry,
-                        number = addressNumber,
-                        complement = addressComplement,
-                        cep = addressPostal,
-                        client = models.Client.objects.get(email=request.user.email)
-                    )
-                    new_address.save()
-                except:
-                    print("Deu erro na criação")
-            elif 'profile_add_card' in request.POST:
-                cardNumber = request.POST.get("cardNumber")
-                cardValidation = request.POST.get("cardValidation")
-                cardSecurity = request.POST.get("cardSecurity")
-                cardFlag = request.POST.get("cardFlag")
-                try:
-                    new_card = models.Card(
-                        client = models.Client.objects.get(email=request.user.email),
-                        number = cardNumber,
-                        validation = cardValidation,
-                        security_code = cardSecurity,
-                        flag = cardFlag
-                    )
-                    new_card.save()
-                except:
-                    print("Deu erro na criação")
-            elif 'profile_save' in request.POST:
-                profileEmail = request.POST.get("email")
-                profilePassword = request.POST.get("password")
-                profileFirstName = request.POST.get("first_name")
-                profileLastName = request.POST.get("last_name")
-                profileCpf = request.POST.get("cpf")
-                profilePhone = request.POST.get("phone")
-                try:
-                    edit_profile = models.Client.objects.get(email=request.user.email)
-                    edit_profile.first_name = profileFirstName
-                    edit_profile.last_name = profileLastName
-                    edit_profile.cpf = profileCpf
-                    edit_profile.phone = profilePhone
-                    edit_profile.password = profilePassword
-                    edit_profile.save(force_update=True)
-                except:
-                    print("Deu erro na edição")
-            else:
-                print("coecoe")
-        data['address_list'] = models.Address.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
-        data['card_list'] = models.Card.objects.all().filter(client=models.Client.objects.get(email=request.user.email))
-        data['client'] = models.Client.objects.get(email=request.user.email)
-        return render(request,'mains/profile.html',data)
-    else:
-        if request.method == 'POST':
-            print(request.POST)
-            if 'profile_add_product' in request.POST:
-                productName = request.POST.get("productName")
-                productId = request.POST.get("ProductId")
-                productPrice = request.POST.get("productPrice")
-                try:
-                    new_product = models.Product(    
-                        name = productName,
-                        id_product = productId,
-                        price = productPrice,
-                        supplier = models.Supplier.objects.get(email=request.user.email)
-                    )
-                    new_product.save()
-                except:
-                    print("Deu erro na criação")
-        data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(email=request.user.email))
-        data['supplier'] = models.Supplier.objects.get(email=request.user.email)
-        return render(request,'mains/profile.html',data)
 
 def delete(request,delete_type,delete_pk):
     data = {}
@@ -305,6 +240,34 @@ def delete(request,delete_type,delete_pk):
         return redirect('profileData1')
     if role==2:
         return redirect('profileData2')
+
+def edit(request,edit_pk):
+    data = {}
+    edit_product = models.Product.objects.get(pk=edit_pk)
+    data['product'] = edit_product
+    data['supplier'] = edit_product.supplier
+    if request.method == 'POST':
+        if 'profile_edit_pro' in request.POST:
+            productName = request.POST.get("productName")
+            productImage = request.POST.get("productImage")
+            productId = request.POST.get("productId")
+            productPrice = request.POST.get("productPrice")
+            productQuant = request.POST.get("productQuant")
+            try:
+                edit_product.name = productName
+                edit_product.image = productImage
+                edit_product.id_product = productId
+                edit_product.price = productPrice
+                edit_product.quantity= productQuant
+                edit_product.supplier = models.Supplier.objects.get(email=request.user.email)
+                edit_product.save()
+                render(request,'mains/profile.html',data)
+                return redirect('profileData2')
+            except:
+                print("Deu erro na criação")    
+    else:
+        print("Erro no sistema.")
+    return render(request,'mains/profile_edit_pro.html',data)
 
 def productPage(request,product_pk):
     data={}
