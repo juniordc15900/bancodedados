@@ -19,33 +19,35 @@ def index(request):
     data['current_description'] = 'b'
     supp = models.Supplier.objects.order_by("?")
     print(supp)
-    for sup in supp:
-        print(sup)
-        pk = sup.pk
-        if models.Product.objects.all().filter(supplier=sup).count() > 0:
-            print(models.Product.objects.all().filter(supplier=sup))
-            data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(pk=pk))
-            break
-    if request.method == 'POST':
-        if 'search_for' in request.POST:
-            data['filter'] = request.POST.get("search_text")
-            data['filterId'] = '0'
-            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
-            print(data['product_list'])
-            return render(request, 'mains/search.html',data)
-    data['category_list'] = list()
-    if models.Product.objects.all().filter(category='comida').count() > 0:
-        data['category_list'].append(models.Product.objects.all().filter(category='comida'))
-    if models.Product.objects.all().filter(category='computador').count() > 0:
-        data['category_list'].append(models.Product.objects.all().filter(category='computador'))
-    if models.Product.objects.all().filter(category='livro').count() > 0:
-        data['category_list'].append(models.Product.objects.all().filter(category='livro'))
-    if models.Product.objects.all().filter(category='roupa').count() > 0:
-        data['category_list'].append(models.Product.objects.all().filter(category='roupa'))
-    if models.Product.objects.all().filter(category='movel').count() > 0:
-        data['category_list'].append(models.Product.objects.all().filter(category='movel'))
-    if models.Product.objects.all().filter(category='outros').count() > 0:
-        data['category_list'].append(models.Product.objects.all().filter(category='outros'))
+    try:
+        for sup in supp:
+            print(sup)
+            pk = sup.pk
+            if models.Product.objects.all().filter(supplier=sup).count() > 0:
+                data['product_list'] = models.Product.objects.all().filter(supplier=models.Supplier.objects.get(pk=pk))
+                break
+        if request.method == 'POST':
+            if 'search_for' in request.POST:
+                data['filter'] = request.POST.get("search_text")
+                data['filterId'] = '0'
+                data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+                print(data['product_list'])
+                return render(request, 'mains/search.html',data)
+        data['category_list'] = list()
+        if models.Product.objects.all().filter(category='comida').count() > 0:
+            data['category_list'].append(models.Product.objects.all().filter(category='comida'))
+        if models.Product.objects.all().filter(category='computador').count() > 0:
+            data['category_list'].append(models.Product.objects.all().filter(category='computador'))
+        if models.Product.objects.all().filter(category='livro').count() > 0:
+            data['category_list'].append(models.Product.objects.all().filter(category='livro'))
+        if models.Product.objects.all().filter(category='roupa').count() > 0:
+            data['category_list'].append(models.Product.objects.all().filter(category='roupa'))
+        if models.Product.objects.all().filter(category='movel').count() > 0:
+            data['category_list'].append(models.Product.objects.all().filter(category='movel'))
+        if models.Product.objects.all().filter(category='outros').count() > 0:
+            data['category_list'].append(models.Product.objects.all().filter(category='outros'))
+    except:
+        print("erro bla bla bla")
     return render(request, 'mains/home1.html',data)
 
 def profileData1(request):
