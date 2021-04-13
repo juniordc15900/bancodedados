@@ -19,7 +19,7 @@ var swiper = new Swiper('.swiper-container.banner', {
   });
 
 var swiper = new Swiper('.swiper-container.product', {
-	slidesPerView: 1,
+	slidesPerView: 4,
 	spaceBetween: 20,
 	loop: true,
 	centeredSlides: true,

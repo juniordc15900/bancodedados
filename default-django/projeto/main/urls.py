@@ -22,7 +22,9 @@ urlpatterns = [
     # Profile #
     path('profile/1',views.profileData1,name='profileData1'),
     path('profile/2',views.profileData2,name='profileData2'),
-    path('carrinho',views.carrinho,name='carrinho'),
+    path('carrinho/',views.carrinho,name='carrinho'),
+    path('finaliza/',views.finaliza,name='finaliza'),
+    path('history/',views.history,name='history'),
 
     # Fornecedor #
     

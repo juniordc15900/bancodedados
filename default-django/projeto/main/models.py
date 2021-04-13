@@ -18,17 +18,6 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 # Paginas do Site
-    
-class Client(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.BigIntegerField(default=0)
-    password = models.CharField(max_length=100)
-    cart = models.CharField(max_length=1000)
-    def __str__(self):
-        return self.first_name+" "+self.last_name
 
 class Supplier(models.Model):
     cnpj = models.CharField(max_length=100)
@@ -45,7 +34,7 @@ class Product(models.Model):
     image = models.ImageField(null=True)
     id_product = models.BigIntegerField()
     price = models.FloatField()
-    quantity = models.BigIntegerField(default=0)
+    quantity = models.FloatField()
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)
     comida = 'comida'
     computador = 'computador'
@@ -69,6 +58,29 @@ class Product(models.Model):
 
     def __str__(self):
         return 'Fornecedor: '+self.supplier.razao+' Produto: '+self.name
+
+class Client(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    cpf = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.BigIntegerField(default=0)
+    password = models.CharField(max_length=100)
+    def __str__(self):
+        return self.first_name+" "+self.last_name
+
+class Sell(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE,default=None)
+    conclude = models.BooleanField(default=0)
+    timestamp = models.DateTimeField(auto_now=True)
+
+class SellProduct(models.Model):
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE,default=None)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,default=None)
+    quantity = models.IntegerField()  
+    sell = models.ForeignKey(Sell, on_delete=models.CASCADE,default=None)
+    value = models.FloatField(default=0)
+    real_value = models.FloatField(default=0)
 
 class Address(models.Model):
     street = models.CharField(max_length=300) 

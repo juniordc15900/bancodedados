@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block main_content %}
+    {% load static %}
+    {% include "includes/cookies/cookie1.html" %}
+    <main class="d-flex align-items-center justify-content-center p-5">
+        {{message}}
+    </main>
+{% endblock %}

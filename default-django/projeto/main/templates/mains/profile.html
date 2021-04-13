@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-1 px-0 pr-4">
                     <div class="w-100 profile-nav d-flex flex-column align-items-center">
-                        <a class="py-2 pt-5 d-flex flex-column align-items-center justify-content-center" href="#">
+                        <a class="py-2 pt-5 d-flex flex-column align-items-center justify-content-center" href="/">
                             <i class="fas fa-2x fa-home"></i>
                             <p>Inicio</p>
                         </a>
@@ -17,11 +17,13 @@
                             <i class="fas fa-2x fa-user"></i>
                             <p>Perfil</p>
                         </a>
-                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="#">
+                        {% if user.profile.role == '1' %}
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="/carrinho">
                             <i class="fas fa-2x fa-shopping-cart"></i>
                             <p>Carrinho</p>
                         </a>
-                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="#">
+                        {% endif %}
+                        <a class="py-2 d-flex flex-column align-items-center justify-content-center" href="/history">
                             <i class="fas fa-2x fa-shopping-bag"></i>
                             <p>Histórico</p>
                         </a>
@@ -150,7 +152,7 @@
                                     <h3 class="h5 m-0">Nome do Produto: {{product.name}}</h3>
                                     <p class="m-0">ID do Produto{{product.id_product}}</p>
                                     <p class="m-0">Preço: {{product.price}}</p>
-                                    <p class="m-0">Preço: {{product.quantity}}</p>
+                                    <p class="m-0">Quantidade: {{product.quantity}}</p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     <a href="/edit/{{product.pk}}"><button type="button" name="button-edit" class="btn btn-secondary m-2">Editar Produto</button></a>

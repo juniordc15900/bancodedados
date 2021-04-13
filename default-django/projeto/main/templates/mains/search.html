@@ -33,7 +33,7 @@
                                 <div class="swiper-wrapper product p-3">
                                     {% for product in product_list %}
                                         <div class="swiper-slide d-flex flex-column">
-                                            <a href="/product-page/{{product.pk}}"><img src="{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
+                                            <a href="/product-page/{{product.pk}}"><img src="/static/custom/img/{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
                                             <h3>{{product.name}}</h3>
                                             <h2>R$ {{product.price}}</h2>
                                         </div>

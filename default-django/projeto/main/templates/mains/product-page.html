@@ -10,12 +10,12 @@
                     <div class="col-8 w-100 h-100 p-0 m-0">
                         <div class="row p-0">
                             <div class="col-12 px-3 p-0 m-0">
-                                <a href="home1.html">voltar à lista </a> |
+                                <a href="/">Página Inicial</a> |
                             </div>
                         </div>
                         <div class="row p-0 m-0">
                             <div class="col-8 p-5 d-flex align-items-center justify-content-around img-product">
-                                <img src="/{{product.image}}" alt="logo-site">
+                                <img src="/static/custom/img/{{product.image}}" alt="logo-site">
                             </div>
                             <div class="col-4 p-3 info-product">
                                 <div class="row p-0 m-0 d-flex align-items-center justify-content-around">
@@ -27,14 +27,14 @@
                                     </div>
                                 </div>
                                 <div class="row p-0 m-0">
-                                    <div class="col-6">
+                                    <div class="col-8">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <p>10023 opiniões</p>
                                     </div>
                                 </div>
@@ -45,39 +45,26 @@
                                         <p><a>ver meios de pagamento</a></p>
                                     </div>
                                 </div>
-                                <div class="row p-3">
+                                <form class="row p-3" method="POST">
+                                    {% csrf_token %}
                                     <div class="col-12 p-0">
                                         <p>Fornecedor: {{product.supplier.razao}}</p>
-                                        <h4>Estoque Disponível</h4>
-                                        <div class="dropdown d-flex">
-                                            <h4 class="mr-3">Quantidade:</h4>
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              1 unidade
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" href="#">2 unidades</a>
-                                              <a class="dropdown-item" href="#">3 unidades</a>
-                                              <a class="dropdown-item" href="#">4 unidades</a>
-                                              <a class="dropdown-item" href="#">5 unidades</a>
-                                              <a class="dropdown-item" href="#">6 unidades</a>
-                                              <a class="dropdown-item" href="#">7 unidades</a>
-                                              <a class="dropdown-item" href="#">8 unidades</a>
-                                              <a class="dropdown-item" href="#">9 unidades</a>
-                                              <a class="dropdown-item" href="#">10 unidades</a>
-                                            </div>
+                                        <h4>Estoque Disponível: {{product.quantity}}</h4>
+                                        <div class="d-flex align-items-center">
+                                            <h3 class="p-3">Quantidade:</h3>
+                                            <input class="col-3 h-50" type="number" value="1" name="productQuantity" min="1" max="{{product.quantity}}" placeholder="">
                                         </div>
                                         <div class=" buttons-buy d-flex flex-column align-items-center justify-content-around py-3">
-                                            <a href="#" class="w-100"><button type="button" class="btn btn-primary w-100 mb-2">Comprar Agora</button></a>
-                                            <a href="#" class="w-100"><button type="button" class="btn btn-light w-100">Adicionar ao carrinho</button></a>
+                                            {% if product.quantity > 0 %}
+                                                <button type="submit" class="btn btn-primary w-100 mb-2" name="cart_add">Comprar Agora</button>
+                                                <button type="submit" class="btn btn-secondary w-100" name="cart_add">Adicionar ao carrinho</button>
+                                            {% endif %}
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-2"></div>
                 </div>
-
-
-
 {% endblock %}

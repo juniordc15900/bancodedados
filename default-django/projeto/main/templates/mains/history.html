@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block main_content %}
+    {% load static %}
+    {% include "includes/cookies/cookie1.html" %}
+    <main class="carrinho d-flex align-items-center justify-content-center flex-column py-3">
+        <div class="row pb-5">
+            <h1 class="h2">Histórico</h1>
+        </div>
+        {% if user.profile.role == '2' %}
+        <div class="row col-6">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Vendido Por</th>
+                    <th scope="col">Ganho Real(-1%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for product in sell_list %}
+                    <tr>
+                        <td>{{product.product.name}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.value}}</td>
+                        <td>{{product.real_value}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% elif user.profile.role == '1' %}
+        <div class="row col-6">
+            {% for buy in buy_list %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Venda feita: {{buy.0.sell.timestamp}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in buy %}
+                            <tr>
+                                <td>{{product.product.name}}</td>
+                                <td>{{product.quantity}}</td>
+                                <td>{{product.value}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </tbody>
+            </table>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </main>
+{% endblock %}

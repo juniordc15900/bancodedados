@@ -124,6 +124,7 @@ def profileData2(request):
             productId = request.POST.get("productId")
             productPrice = request.POST.get("productPrice")
             productQuant = request.POST.get("productQuant")
+            productCategory = request.POST.get("productCategory")
             print("2")
             
             try:
@@ -133,6 +134,7 @@ def profileData2(request):
                     id_product = productId,
                     price = productPrice,
                     quantity= productQuant,
+                    category= productCategory,
                     supplier = models.Supplier.objects.get(email=request.user.email)
                 )
                 new_product.save()
@@ -140,11 +142,9 @@ def profileData2(request):
                 print("Deu erro na criação")        
         if 'profile_edit_pro' in request.POST:
             productName = request.POST.get("productName")
-            productImage = request.POST.get("productImage")
             productId = request.POST.get("productId")
             productPrice = request.POST.get("productPrice")
             productQuant = request.POST.get("productQuant")
-            
             
             try:
                 new_product = models.Product(    
@@ -233,6 +233,11 @@ def delete(request,delete_type,delete_pk):
         delete_product = models.Product.objects.get(pk=delete_pk)
         if(delete_product.supplier == models.Supplier.objects.get(email=request.user.email)):
             delete_product.delete()
+    elif(delete_type == 'sellProduct'):
+        delete_product = models.SellProduct.objects.get(pk=delete_pk)
+        delete_product.delete()
+        render(request,'mains/carrinho.html',data)
+        return redirect('carrinho')
     else:
         print("Erro no sistema.")
     
@@ -251,17 +256,14 @@ def edit(request,edit_pk):
     if request.method == 'POST':
         if 'profile_edit_pro' in request.POST:
             productName = request.POST.get("productName")
-            productImage = request.POST.get("productImage")
-            productId = request.POST.get("productId")
             productPrice = request.POST.get("productPrice")
             productQuant = request.POST.get("productQuant")
+            productCategory = request.POST.get("productCategory")
             try:
                 edit_product.name = productName
-                edit_product.image = productImage
-                edit_product.id_product = productId
                 edit_product.price = productPrice
                 edit_product.quantity= productQuant
-                edit_product.supplier = models.Supplier.objects.get(email=request.user.email)
+                edit_product.category= productCategory
                 edit_product.save()
                 render(request,'mains/profile.html',data)
                 return redirect('profileData2')
@@ -282,10 +284,100 @@ def productPage(request,product_pk):
             data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
             print(data['product_list'])
             return render(request, 'mains/search.html',data)
+        elif 'cart_add' in request.POST:
+            client = models.Client.objects.get(email=request.user.email)
+            quantidade = request.POST.get("productQuantity")
+            cart = models.Sell.objects.all().filter(client=client).filter(conclude=0)
+            if cart.count() > 0:
+                sell_obj = cart.first()
+                product_list = models.SellProduct.objects.all().filter(sell=sell_obj)
+                product=models.Product.objects.get(pk=product_pk)
+                has_product = product_list.filter(product=product)
+                if has_product.count() > 0:
+                    sell_product = has_product.first()
+                    sell_product.quantity = float(sell_product.quantity)+float(quantidade)
+                    sell_product.value = float(sell_product.value)+(float(quantidade)*float(models.Product.objects.get(pk=product_pk).price))
+                    sell_product.save()
+                else:
+                    produto_vendido = models.SellProduct(
+                        product=product, 
+                        quantity=quantidade, 
+                        supplier=models.Product.objects.get(pk=product_pk).supplier,
+                        sell=sell_obj,
+                        value=float(quantidade)*float(models.Product.objects.get(pk=product_pk).price),
+                        real_value=(float(quantidade)*float(models.Product.objects.get(pk=product_pk).price))-(float(quantidade)*float(models.Product.objects.get(pk=product_pk).price)*0.01)
+                    )
+                    produto_vendido.save()
+            else:
+                sell_obj = models.Sell(client=client)
+                sell_obj.save()
+                produto_vendido = models.SellProduct(
+                    product=models.Product.objects.get(pk=product_pk), 
+                    quantity=quantidade, 
+                    supplier=models.Product.objects.get(pk=product_pk).supplier,
+                    sell=sell_obj,
+                    value=float(quantidade)*float(models.Product.objects.get(pk=product_pk).price),
+                    real_value=(float(quantidade)*float(models.Product.objects.get(pk=product_pk).price))-(float(quantidade)*float(models.Product.objects.get(pk=product_pk).price)*0.01)
+                )
+                produto_vendido.save()            
+            product_list = models.SellProduct.objects.all().filter(sell=sell_obj)
+            data['carrinho'] = product_list
+            return render(request,'mains/carrinho.html',data)
+
     product = models.Product.objects.get(pk=product_pk)
     data['product'] = product
     data['productx10'] = int(product.price) / 10
     return render(request,'mains/product-page.html',data)
+
+def finaliza(request):
+    data={}
+    client = models.Client.objects.get(email=request.user.email)
+    sell_obj = models.Sell.objects.all().filter(client=client).filter(conclude=0).first()
+    product_list = models.SellProduct.objects.all().filter(sell=sell_obj)
+    for product_sell in product_list:
+        if product_sell.quantity > product_sell.product.quantity or product_sell.quantity < 0:
+            data['message'] = "Desculpe mas o produto "+str(product_sell.product.name)+" não tem essa quantidade no estoque"
+            delete_product = models.SellProduct.objects.get(pk=product_sell.pk)
+            delete_product.delete()
+            return render(request,'mains/finaliza.html',data)
+    for product_sell in product_list:
+        product_sell.product.quantity = product_sell.product.quantity - product_sell.quantity
+        product_sell.product.save()
+    sell_obj.conclude = 1
+    sell_obj.save()
+    data['message'] = "Sua compra foi efetuada com sucesso!"
+    return render(request,'mains/finaliza.html',data)
+
+def history(request):
+    data={}
+    user = request.user
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
+    if user.profile.role == '1':
+        client = models.Client.objects.get(email=request.user.email)
+        buy_list = models.Sell.objects.all().filter(client=client)
+        buy_list = models.Sell.objects.all().filter(client=client).filter(conclude=1)
+        print(buy_list)
+        lista_compras_final = list()
+        for buy in buy_list:
+            lista_compras = list()
+            print(buy)
+            sell_list = models.SellProduct.objects.all().filter(sell=buy)
+            for sell in sell_list:
+                lista_compras.append(sell)
+            lista_compras_final.append(lista_compras)
+        data['buy_list'] = lista_compras_final
+    else:
+        supplier = models.Supplier.objects.get(email=request.user.email)
+        sell_list = models.SellProduct.objects.all().filter(supplier=supplier)
+        data['sell_list'] = sell_list
+    return render(request,'mains/history.html',data)
+
 
 def logout(request):
     data = {}
@@ -313,7 +405,8 @@ def login(request):
         if user is not None:
             if user.is_active:
                 dj_login(request, user)
-                return render(request,'mains/home1.html',data)
+                render(request,'mains/home1.html',data)
+                return redirect('home')
             else:
                 data["message"] = "Sua conta foi desativada."
         else:
@@ -358,7 +451,8 @@ def registerClient(request):
             django_user.profile.role = 1
             django_user.save()
             dj_login(request,django_user)
-            return render(request,'mains/home1.html', data)
+            render(request,'mains/home1.html', data)
+            return redirect('home')
         else:
             print("Essa conta já existe")
             data['message'] = "O e-mail "+email+" já está cadastrado, por favor escolha algum outro!"
@@ -375,9 +469,6 @@ def registerSupplier(request):
             data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
             print(data['product_list'])
             return render(request, 'mains/search.html',data)
-    data['current_title'] = 'a'
-    data['current_description'] = 'b'
-
     if request.method == 'POST':
         cnpj = request.POST.get("cnpj")
         razao = request.POST.get("razao")
@@ -399,18 +490,28 @@ def registerSupplier(request):
             django_user.profile.role = 2
             django_user.save()
             dj_login(request,django_user)
+            render(request,'mains/home1.html', data)
+            return redirect('home')
         else:
             print("Essa conta já existe")
             data['message'] = "O e-mail "+email+" já está cadastrado, por favor escolha algum outro!"
 
-    return render(request,'mains/cadastra-fornecedor.html', data)
+    return render(request, 'mains/cadastra-fornecedor.html',data)
+
 
 def carrinho(request):
     data = {}
+    if request.method == 'POST':
+        if 'search_for' in request.POST:
+            data['filter'] = request.POST.get("search_text")
+            data['filterId'] = '0'
+            data['product_list'] = models.Product.objects.filter(name__contains = request.POST.get("search_text"))
+            print(data['product_list'])
+            return render(request, 'mains/search.html',data)
     client = models.Client.objects.get(email=request.user.email)
-    client_cart = client.cart
-    client_cart = client_cart.split(',')
-    data['carrinho'] = client_cart
+    sell_obj = models.Sell.objects.all().filter(client=client).filter(conclude=0).first()
+    product_list = models.SellProduct.objects.all().filter(sell=sell_obj)
+    data['carrinho'] = product_list
     return render(request,'mains/carrinho.html', data)
 
 def document(request,type_model=''):

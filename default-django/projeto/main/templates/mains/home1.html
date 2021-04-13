@@ -87,19 +87,18 @@
                 <div class="supplier_day col-12 p-0">
                     <!-- Swiper -->
                     <div class="swiper-container product w-75">
-                        <div class="swiper_title p-3">
-                            <h1>Fornecedor do dia:  {{product_list.0.supplier.razao}}</h1>
+                        <div class="swiper_title p-3  w-100 align-items-center justify-content-center d-flex">
+                            <h1 class="py-3">Fornecedor do dia:  {{product_list.0.supplier.razao}}</h1>
                         </div>
                             <div class="swiper-wrapper product p-3">
                                 {% for product in product_list %}
                                     <div class="swiper-slide d-flex flex-column">
-                                        <a href="/product-page/{{product.pk}}"><img src="/static/custom/img/{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
-                                        <h3>{{product.name}}</h3>
-                                        <h2>R$ {{product.price}}</h2>
-                                        <div class="d-flex">
-                                            <a href="/finaliza/{{product.pk}}"><button type="button" class="btn btn-success mx-1" id="compra-cart">Comprar Agora</button></a>
-                                            <a href="/carrinho/{{product.pk}}"><button type="button" class="btn btn-secondary mx-1" id="adiciona-cart">Adicionar ao Carrinho</button></a>
-                                        </div>    
+                                        <div class="card">
+                                            <a href="/product-page/{{product.pk}}"><img src="/static/custom/img/{{product.image}}" alt="produto" style="width:100%"></a>
+                                            <h1>{{product.name}}</h1>
+                                            <p class="price">R$ {{product.price}}</p>
+                                            <a href="/product-page/{{product.pk}}"><p><button>Ver Produto</button></p></a>
+                                        </div> 
                                     </div>
                                 {% endfor %}
                             </div>
@@ -110,24 +109,23 @@
                 </div>
             </div>
             {% for categoria in category_list %}
-            <div class="row">
+            <div class="row pt-5">
                 <div class="supplier_day col-12 p-0">
                     <!-- Swiper -->
                     <div class="swiper-container product w-75">
-                        <div class="swiper_title p-3">
-                            <h1>Categoria: {{categoria.first.category}}</h1>
+                        <div class="swiper_title p-3 w-100 align-items-center justify-content-center d-flex">
+                            <h1 class="py-3">Categoria: {{categoria.first.category}}</h1>
                         </div>
                             <div class="swiper-wrapper product p-3">
-                                {% for product in categoria %}
-                                    <div class="swiper-slide d-flex flex-column">
-                                        <a href="/product-page/{{product.pk}}"><img src="{{product.image}}" alt=logo-site height="150px" width="150px" class="p-3"></a>
-                                        <h3>{{product.name}}</h3>
-                                        <h2>R$ {{product.price}}</h2>
-                                        <div class="d-flex">
-                                            <a href="/finaliza/{{product.pk}}"><button type="button" class="btn btn-success mx-1" id="compra-cart">Comprar Agora</button></a>
-                                            <a href="/carrinho/{{product.pk}}"><button type="button" class="btn btn-secondary mx-1" id="adiciona-cart">Adicionar ao Carrinho</button></a>
-                                        </div>  
-                                    </div>
+                                {% for product in categoria %} 
+                                <div class="swiper-slide d-flex flex-column">
+                                    <div class="card d-flex flex-column justify-content-between align-items-center">
+                                        <a href="/product-page/{{product.pk}}"><img src="/static/custom/img/{{product.image}}" alt="produto" style="width:100%"></a>
+                                        <p>{{product.name}}</p>
+                                        <p class="price">R$ {{product.price}}</p>
+                                        <a href="/product-page/{{product.pk}}"><p><button>Ver Produto</button></p></a>
+                                    </div> 
+                                </div>
                                 {% endfor %}
                             </div>
                         <!-- Add Arrows -->
@@ -137,6 +135,7 @@
                 </div>
             </div>
             {% endfor %}
+            <div class="row p-3"></div>
         </div>
     </main>
 {% endblock %}
